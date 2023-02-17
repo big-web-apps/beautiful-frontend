@@ -84,15 +84,15 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
             <Grid pt={24} grow align={'stretch'}>
               <Grid.Col span={4}>
                 <Card shadow="sm" p="lg" radius="md" withBorder style={{ minHeight: '100%' }}>
-                  <Text fz={16} fw={300} style={{ lineHeight: 1.1 }}>
-                    Цены на недвижимость на пике, не рекомендуем вкладываться в ближайшее время в готовое жилье. Стоит
-                    рассмотреть варианты на уровне котлована или же другие источники.
+                  <Text fz={18} fw={300} style={{ lineHeight: 1.1 }}>
+                    Цены на недвижимость на пике, не рекомендуем вкладываться в ближайшее время в готовое жилье. Но
+                    стоит рассмотреть варианты на уровне котлована или же другие источники (торги, земельные участки).
                   </Text>
                 </Card>
               </Grid.Col>
               <Grid.Col span={4}>
                 <Card shadow="sm" p="lg" radius="md" withBorder style={{ minHeight: '100%' }}>
-                  <Text fz={16} fw={300} style={{ lineHeight: 1.1 }}>
+                  <Text fz={18} fw={300} style={{ lineHeight: 1.1 }}>
                     Рекомендуем обратить внимание на льготную ипотеку для айтишников, а также на некоторые варианты
                     субсидированной ипотеки от государства.
                   </Text>
@@ -100,7 +100,7 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
               </Grid.Col>
               <Grid.Col span={4}>
                 <Card shadow="sm" p="lg" radius="md" withBorder style={{ minHeight: '100%' }}>
-                  <Text fz={16} fw={300} style={{ lineHeight: 1.1 }}>
+                  <Text fz={18} fw={300} style={{ lineHeight: 1.1 }}>
                     Отличное время для продажи, но надо быть готовым к долгому поиску покупателя
                   </Text>
                 </Card>
