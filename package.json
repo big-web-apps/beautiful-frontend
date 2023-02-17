@@ -1,0 +1,59 @@
+{
+  "name": "invest-estate",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@firebase/auth-types": "^0.11.0",
+    "@firebase/firestore-types": "^2.5.0",
+    "@mantine/core": "^5.7.2",
+    "@mantine/hooks": "^5.7.2",
+    "@pbe/react-yandex-maps": "^1.2.2",
+    "@types/node": "^16.11.26",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "axios": "^0.27.2",
+    "firebase": "^9.6.8",
+    "mobx": "^6.7.0",
+    "mobx-react-lite": "^3.4.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-firebase-hooks": "^5.0.3",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "5.0.0",
+    "tabler-icons-react": "^1.48.0",
+    "typescript": "^4.6.2",
+    "uuid": "^8.3.2",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/uuid": "^8.3.4",
+    "prettier": "^2.7.1"
+  }
+}
