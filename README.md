@@ -1,4 +1,4 @@
-# QubanTech App
+# Big web app App
 
 # Структура шаблона
 ### base
