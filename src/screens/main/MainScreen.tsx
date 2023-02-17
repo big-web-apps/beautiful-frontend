@@ -11,10 +11,10 @@ export const MainScreen: React.FC<IMainScreenProps> = () => {
 
   //Render
   return (
-    /*<DefaultLayout>
-      <Container size={'md'}>*/
-    <div>ха-ха</div>
-    /*</Container>
-    </DefaultLayout>*/
+    <DefaultLayout>
+      <>
+        <div>ха-ха</div>
+      </>
+    </DefaultLayout>
   );
 };

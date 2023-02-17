@@ -1,17 +1,17 @@
-import { ActionIcon, Container, createStyles, Group, Header as MantineHeader } from '@mantine/core';
+import { ActionIcon, Button, Container, createStyles, Group, Header as MantineHeader } from '@mantine/core';
 import { BrandReact, Plus } from 'tabler-icons-react';
 import { ColorSchemeButton } from '../../ColorSchemeButton';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { NavLinks, Routes } from '../../../routes/routes';
-import { observer } from 'mobx-react-lite';
-import { DesktopNavItem } from './components/DesktopNavItem';
 import { useAllMQ } from '../../../base/hooks/useAllMQ';
 import { MobileNavItem } from './components/MobileNavItem';
+import { DesktopNavItem } from './components/DesktopNavItem';
 
 const DefaultLayout = (props: { children: JSX.Element }) => {
   const { classes } = useStyles();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { isMD } = useAllMQ();
 
@@ -32,11 +32,11 @@ const DefaultLayout = (props: { children: JSX.Element }) => {
             {renderDesktopNavList()}
           </Group>
           <Group position={'right'}>
-            {/*{location.pathname !== Routes.auth && (
+            {location.pathname !== Routes.auth && (
               <Button variant={'subtle'} onClick={handleUserButton}>
                 Профиль
               </Button>
-            )}*/}
+            )}
             <ColorSchemeButton />
           </Group>
         </Container>

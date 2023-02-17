@@ -18,12 +18,10 @@ export const NavLinks: NavLinkModel[] = [
   {
     path: '/main',
     title: 'Покупка недвижимости',
-    icon: <MainScreen />,
   },
   {
     path: '/stat',
     title: 'Статистика',
-    icon: <StatScreen />,
   },
 ];
 
