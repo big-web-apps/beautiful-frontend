@@ -28,14 +28,14 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
   const data = [
     {
       label: 'Средняя цена в Краснодаре (январь 2023)',
-      stats: '118865 р',
+      stats: '118 865 р',
       progress: 60,
       color: theme.colors.green[5],
       icon: <ArrowUpRight />,
     },
     {
       label: 'Средняя цена в Краснодаре (январь 2023)',
-      stats: '118865 р',
+      stats: '118 865 р',
       progress: 60,
       color: theme.colors.green[5],
       icon: <ArrowUpRight />,
@@ -58,7 +58,7 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
             zIndex: -1,
           }}
         ></div>*/}
-        <Text size={26} py={40} weight={700}>
+        <Text size={26} py={40} weight={500}>
           Статистика
         </Text>
         <StatsRing data={data} />

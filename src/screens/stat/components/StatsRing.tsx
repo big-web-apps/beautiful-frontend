@@ -25,10 +25,10 @@ export function StatsRing({ data }: StatsRingProps) {
           />
 
           <div>
-            <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
+            <Text color="dimmed" size="xs" transform="uppercase" weight={600}>
               {stat.label}
             </Text>
-            <Text weight={700} size="xl">
+            <Text weight={600} size="xl">
               {stat.stats}
             </Text>
           </div>

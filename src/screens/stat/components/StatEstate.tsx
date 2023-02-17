@@ -93,12 +93,12 @@ export const StateEstate: React.FC<ICompetenciesChartProps> = props => {
 
   //Render
   return (
-    <Stack mt={50} spacing={0} sx={{ width: '100%' }}>
-      <Stack mb={-20} spacing={10} sx={{ width: '100%' }}>
-        <Text fz={26} fw={600} style={{ lineHeight: 1 }}>
+    <Stack mt={60} spacing={0} sx={{ width: '100%' }}>
+      <Stack spacing={10} sx={{ width: '100%' }}>
+        <Text fz={26} fw={500} style={{ lineHeight: 1 }}>
           {props.title}
         </Text>
-        <Text fz={'sm'} fw={300} style={{ lineHeight: 1 }}>
+        <Text fz={'md'} fw={300} style={{ lineHeight: 1 }}>
           {props.subtitle}
         </Text>
       </Stack>
