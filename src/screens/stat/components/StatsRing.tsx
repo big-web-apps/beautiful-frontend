@@ -1,5 +1,4 @@
 import { Center, Group, Paper, RingProgress, SimpleGrid, Text } from '@mantine/core';
-import { ArrowDownRight, ArrowUpRight } from 'tabler-icons-react';
 
 export interface StatsRingProps {
   data: {
@@ -15,7 +14,7 @@ export function StatsRing({ data }: StatsRingProps) {
   const stats = data.map(stat => {
     return (
       <Paper withBorder radius="md" p="xs" key={stat.label}>
-        <Group>
+        <Group noWrap>
           <RingProgress
             size={80}
             roundCaps
@@ -25,7 +24,7 @@ export function StatsRing({ data }: StatsRingProps) {
           />
 
           <div>
-            <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
+            <Text color="dimmed" size="xs" transform="uppercase" weight={700} lineClamp={2}>
               {stat.label}
             </Text>
             <Text weight={700} size="xl">
