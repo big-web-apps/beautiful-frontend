@@ -7,6 +7,7 @@ import { Routes } from '../../routes/routes';
 import {Avatar, Button, Container, Group, Paper, Stack, Text, Title} from '@mantine/core';
 import DefaultLayout from '../../components/layouts/defaultLayout/DefaultLayout';
 import { observer } from 'mobx-react-lite';
+import EstateCard from '../../components/estate-card/EstateCard';
 
 export const ProfileScreen = observer(() => {
   const { exampleStore, userStore } = useRootStore();
@@ -42,8 +43,11 @@ export const ProfileScreen = observer(() => {
             </Stack>
           </Group>
         </Paper>
-        <Text size={26} fw={500} mt={35}>Портфель</Text>
-        <></>
+        <Text size={26} fw={500} my={35}>Портфель</Text>
+        <Group grow>
+          <EstateCard />
+          <EstateCard />
+        </Group>
         {/*<Button onClick={handleLogout}>Logout</Button>*/}
       </Container>
     </DefaultLayout>
