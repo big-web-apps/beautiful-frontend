@@ -18,12 +18,7 @@ export const LoginComponent = () => {
   const navigate = useNavigate();
 
   const login = () => {
-    signInWithEmailAndPassword(email, password).then(resp => {
-      if (resp?.user?.uid) {
-        userStore.setUserUid(resp.user.uid);
-        navigate(Routes.checkRole);
-      }
-    });
+    navigate(Routes.main);
   };
 
   return (
@@ -50,7 +45,7 @@ export const LoginComponent = () => {
       />
       <Space h={'xl'} />
       <Button size={'lg'} fullWidth onClick={login}>
-        Вход
+        Вход (просто нажми)
       </Button>
       {error?.message}
     </>
