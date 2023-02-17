@@ -6,7 +6,7 @@ import { useLocalStorage } from '@mantine/hooks';
 
 export const App: React.FC = () => {
   const MANTINE_THEME: MantineThemeOverride = {
-    primaryColor: 'green',
+    primaryColor: 'indigo',
     breakpoints: {
       xs: 350,
       sm: 768,
