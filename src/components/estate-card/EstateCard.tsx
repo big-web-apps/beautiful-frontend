@@ -1,38 +1,50 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {ActionIcon, Badge, Button, Card, Group, Image, Text} from '@mantine/core';
 import {Heart} from 'tabler-icons-react';
 
 import img from './../../assets/images/image.png';
 
-const data = {
-  title: "ЖК Смородина",
-  address: "Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7",
-  square: 37.65,
-  rooms: 1,
-  floor: "6-10",
-  category: "Элит",
-  price: "4 860 615 ₽"
+interface EstateCardInterface {
+  title: string,
+  address: string,
+  square: Number,
+  rooms: Number,
+  floor: string,
+  category: string,
+  price: string,
+  isLiked?: boolean
+
 }
-const EstateCard = () => {
+
+const EstateCard: FC<EstateCardInterface> = ({
+  title,
+  address,
+  square,
+  rooms,
+  floor,
+  category,
+  price,
+  isLiked = false
+}) => {
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder sx={{position: 'relative', zIndex: 1}}>
       <Group position={"apart"}>
         <Text size={20} fw={600} color={''}>
-          {  data.rooms + "-комн. кв., " + data.square + " м², " + data.floor + " этаж" }
+          {  rooms + "-комн. кв., " + square + " м², " + floor + " этаж" }
         </Text>
-        <ActionIcon radius={100} size={'lg'} color={'red'} variant={"outline"}>
+        <ActionIcon radius={100} size={'lg'} color={'red'} variant={isLiked ? 'filled' : 'outline'}>
           <Heart size={22} />
         </ActionIcon>
       </Group>
-      <Badge mt={10} variant={'dot'} >{ data.category }</Badge>
+      <Badge mt={10} variant={'dot'} >{ category }</Badge>
       <Text mt={30} size={15} c={'gray.7'}>
-        {data.title}
+        {title}
       </Text>
       <Text mt={5} size={15} c={'gray.7'} inline sx={{zIndex: 2, position: 'relative'}}>
-        {data.address}
+        {address}
       </Text>
       <Text mt={30} mb={40} size={22} fw={500}>
-        {data.price}
+        {price}
       </Text>
       <Group position={'left'}>
         <Button  >Перейти на сайт </Button>
