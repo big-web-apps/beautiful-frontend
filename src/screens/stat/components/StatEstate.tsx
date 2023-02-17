@@ -47,8 +47,6 @@ export const options: ChartOptions<'line'> = {
 };
 
 interface ICompetenciesChartProps {
-  title: string;
-  subtitle: string;
   data: any;
 }
 
@@ -68,7 +66,7 @@ export const StateEstate: React.FC<ICompetenciesChartProps> = props => {
     let datasets: any[] = [];
 
     if (!!props?.data) {
-      props?.data?.city?.data.map((item: any) => {
+      props?.data?.city?.data.forEach((item: any) => {
         labels.push(item?.[0]);
       });
 
@@ -76,9 +74,12 @@ export const StateEstate: React.FC<ICompetenciesChartProps> = props => {
         const color = ColorHelper.getRandomColor();
         datasets.push({
           label: item?.label,
-          data: item?.data.reverse().map((item2: any) => {
-            return item2?.[1];
-          }),
+          data: item?.data
+            ?.slice()
+            ?.reverse()
+            .map((item2: any) => {
+              return item2?.[1];
+            }),
           borderColor: color,
           backgroundColor: color,
           hidden: [0, 1, 2].includes(index) ? false : true,
@@ -86,22 +87,14 @@ export const StateEstate: React.FC<ICompetenciesChartProps> = props => {
           tension: 0.4,
         });
       });
-      labels = labels.reverse();
+      labels = labels.slice().reverse();
       setChartData({ labels, datasets });
     }
   };
 
   //Render
   return (
-    <Stack mt={60} spacing={0} sx={{ width: '100%' }}>
-      <Stack spacing={10} sx={{ width: '100%' }}>
-        <Text fz={26} fw={500} style={{ lineHeight: 1 }}>
-          {props.title}
-        </Text>
-        <Text fz={'md'} fw={300} style={{ lineHeight: 1 }}>
-          {props.subtitle}
-        </Text>
-      </Stack>
+    <Stack spacing={0} sx={{ minWidth: '100%' }}>
       {chartData ? <Line height={150} options={options} data={chartData} /> : <Loader />}
     </Stack>
   );
