@@ -2,7 +2,7 @@ import { ActionIcon, Container, createStyles, Group, Header as MantineHeader, Bu
 import { BrandReact, Plus } from 'tabler-icons-react';
 import { ColorSchemeButton } from '../../ColorSchemeButton';
 import { useRootStore } from '../../../base/RootStore';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { NavLinks, Routes } from '../../../routes/routes';
 import { observer } from 'mobx-react-lite';
 import { DesktopNavItem } from './components/DesktopNavItem';
@@ -14,6 +14,7 @@ const DefaultLayout = observer((props: { children: JSX.Element }) => {
   const { classes } = useStyles();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { isMD } = useAllMQ();
 
@@ -38,9 +39,11 @@ const DefaultLayout = observer((props: { children: JSX.Element }) => {
             {renderDesktopNavList()}
           </Group>
           <Group position={'right'}>
-           {/* <Button variant={'subtle'} onClick={handleUserButton}>
-              {userStore.userInfo ? userStore.userInfo.lastname : 'Вход'}
-            </Button>*/}
+            {location.pathname !== Routes.auth && (
+              <Button variant={'subtle'} onClick={handleUserButton}>
+                Профиль
+              </Button>
+            )}
             <ColorSchemeButton />
           </Group>
         </Container>

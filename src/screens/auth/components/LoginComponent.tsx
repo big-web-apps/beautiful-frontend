@@ -1,7 +1,7 @@
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, LoadingOverlay, Space, TextInput } from '@mantine/core';
+import { Button, Container, LoadingOverlay, Space, TextInput } from '@mantine/core';
 import { Lock, Mail } from 'tabler-icons-react';
 import { auth } from '../../../base/firebase/firebase-config';
 import { useRootStore } from '../../../base/RootStore';
@@ -18,16 +18,17 @@ export const LoginComponent = () => {
   const navigate = useNavigate();
 
   const login = () => {
-    signInWithEmailAndPassword(email, password).then(resp => {
+    navigate(Routes.main);
+    /*signInWithEmailAndPassword(email, password).then(resp => {
       if (resp?.user?.uid) {
         userStore.setUserUid(resp.user.uid);
-        navigate(Routes.checkRole);
+        navigate(Routes.stat);
       }
-    });
+    });*/
   };
 
   return (
-    <>
+    <Container size={'sm'} pt={24}>
       {loading && <LoadingOverlay visible={true} />}
       <TextInput
         variant={'filled'}
@@ -50,9 +51,9 @@ export const LoginComponent = () => {
       />
       <Space h={'xl'} />
       <Button size={'lg'} fullWidth onClick={login}>
-        Вход
+        Вход (просто нажми на меня)
       </Button>
       {error?.message}
-    </>
+    </Container>
   );
 };
