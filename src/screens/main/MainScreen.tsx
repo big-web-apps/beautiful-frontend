@@ -12,9 +12,7 @@ export const MainScreen: React.FC<IMainScreenProps> = () => {
   //Render
   return (
     <DefaultLayout>
-      <>
-        <div>ха-ха</div>
-      </>
+      <div>ха-ха</div>
     </DefaultLayout>
   );
 };
