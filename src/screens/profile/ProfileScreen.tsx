@@ -33,7 +33,7 @@ export const ProfileScreen = observer(() => {
   //Renders
   return (
     <DefaultLayout>
-      <Container size={'md'} mt={20} >
+      <Container size={'xl'} mt={20} >
         <Paper>
           <Group spacing={20}>
             <Avatar color={'indigo'} radius={100} size={80} />
@@ -45,6 +45,7 @@ export const ProfileScreen = observer(() => {
         </Paper>
         <Text size={26} fw={500} my={35}>Портфель</Text>
         <Group grow>
+          <EstateCard />
           <EstateCard />
           <EstateCard />
         </Group>

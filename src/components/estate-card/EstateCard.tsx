@@ -16,7 +16,6 @@ const data = {
 const EstateCard = () => {
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder sx={{position: 'relative', zIndex: 1}}>
-
       <Group position={"apart"}>
         <Text size={20} fw={600} color={''}>
           {  data.rooms + "-комн. кв., " + data.square + " м², " + data.floor + " этаж" }
@@ -25,14 +24,14 @@ const EstateCard = () => {
           <Heart size={22} />
         </ActionIcon>
       </Group>
-      <Badge mt={10} color={''} variant={'dot'} >{ data.category }</Badge>
-      <Text mt={30} size={15} c={'dimmed'}>
+      <Badge mt={10} variant={'dot'} >{ data.category }</Badge>
+      <Text mt={30} size={15} c={'gray.7'}>
         {data.title}
       </Text>
-      <Text mt={5} size={15} c={'dimmed'} inline sx={{zIndex: 2}}>
+      <Text mt={5} size={15} c={'gray.7'} inline sx={{zIndex: 2, position: 'relative'}}>
         {data.address}
       </Text>
-      <Text my={30} size={22} fw={500}>
+      <Text mt={30} mb={40} size={22} fw={500}>
         {data.price}
       </Text>
       <Group position={'left'}>
@@ -43,10 +42,10 @@ const EstateCard = () => {
         width={170}
         sx={{
           position: 'absolute',
-          bottom: -20,
-          right: 0,
+          bottom: -125,
+          right: -20,
           zIndex: 0,
-          opacity: 0.6
+          opacity: 0.4
         }}
       />
     </Card>
