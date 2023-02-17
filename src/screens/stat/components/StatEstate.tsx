@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-/*import {
+import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
@@ -10,12 +10,13 @@ import React, { useEffect, useState } from 'react';
   Legend,
   ChartOptions,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';*/
+import { Line } from 'react-chartjs-2';
 import { Loader, Stack, Text } from '@mantine/core';
+import { ColorHelper } from '../../../helpers/ColorHelper';
 
-//ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-/*export const options: ChartOptions<'line'> = {
+export const options: ChartOptions<'line'> = {
   responsive: true,
   plugins: {
     legend: {
@@ -43,9 +44,11 @@ import { Loader, Stack, Text } from '@mantine/core';
       },
     },
   },
-};*/
+};
 
 interface ICompetenciesChartProps {
+  title: string;
+  subtitle: string;
   data: any;
 }
 
@@ -57,28 +60,49 @@ export const StateEstate: React.FC<ICompetenciesChartProps> = props => {
   //Effects
   useEffect(() => {
     handleChartData();
-  }, [data]);
+  }, []);
 
   //Handlers
   const handleChartData = () => {
     let labels: string[] = [];
     let datasets: any[] = [];
 
-    setChartData({ labels, datasets });
+    if (!!props?.data) {
+      props?.data?.city?.data.map((item: any) => {
+        labels.push(item?.[0]);
+      });
+
+      Object.values(props?.data).map((item: any, index: number) => {
+        const color = ColorHelper.getRandomColor();
+        datasets.push({
+          label: item?.label,
+          data: item?.data.reverse().map((item2: any) => {
+            return item2?.[1];
+          }),
+          borderColor: color,
+          backgroundColor: color,
+          hidden: [0, 1, 2].includes(index) ? false : true,
+          cubicInterpolationMode: 'monotone',
+          tension: 0.4,
+        });
+      });
+      labels = labels.reverse();
+      setChartData({ labels, datasets });
+    }
   };
 
   //Render
   return (
-    <Stack mt={50} spacing={0} sx={{ width: '90vw' }}>
-      <Stack mb={-20} spacing={10} sx={{ width: '90vw' }}>
+    <Stack mt={50} spacing={0} sx={{ width: '100%' }}>
+      <Stack mb={-20} spacing={10} sx={{ width: '100%' }}>
         <Text fz={26} fw={600} style={{ lineHeight: 1 }}>
-          Продажа недвижимости
+          {props.title}
         </Text>
         <Text fz={'sm'} fw={300} style={{ lineHeight: 1 }}>
-          Выберите нужные районы, чтобы отразить их на графике
+          {props.subtitle}
         </Text>
       </Stack>
-      {/*{chartData ? <Line height={350} options={options} data={chartData} /> : <Loader />}*/}
+      {chartData ? <Line height={150} options={options} data={chartData} /> : <Loader />}
     </Stack>
   );
 };
