@@ -5,7 +5,7 @@ import DefaultLayout from '../../components/layouts/defaultLayout/DefaultLayout'
 import { StateEstate } from './components/StatEstate';
 import { StatsRing } from './components/StatsRing';
 import { ArrowDownRight, ArrowUpRight } from 'tabler-icons-react';
-import { dataSell } from './components/data';
+import { dataRents, dataSells } from './components/data';
 import { TabsEstate } from './components/TabsEstate';
 
 interface IMainScreenProps {}
@@ -15,7 +15,8 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
 
   const theme = useMantineTheme();
 
-  const [sellValue, setSellValue] = useState<string>('1');
+  const [sellValue, setSellValue] = useState<string>('0');
+  const [rentValue, setRentValue] = useState<string>('0');
 
   const data = [
     {
@@ -65,7 +66,7 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
               Выберите нужные районы, чтобы отразить их на графике
             </Text>
             <TabsEstate value={sellValue} setValue={setSellValue} />
-            <StateEstate data={dataSell} />
+            <StateEstate data={dataSells[Number(sellValue)]} />
           </Paper>
           <Paper mt={16} withBorder radius="md" p="md">
             <Text pt={8} fz={26} fw={600} style={{ lineHeight: 1 }}>
@@ -74,8 +75,8 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
             <Text py={8} fz={'sm'} fw={300} style={{ lineHeight: 1 }}>
               Выберите нужные районы, чтобы отразить их на графике
             </Text>
-            <TabsEstate value={sellValue} setValue={setSellValue} />
-            <StateEstate data={dataSell} />
+            <TabsEstate value={rentValue} setValue={setRentValue} />
+            <StateEstate data={dataRents[Number(rentValue)]} />
           </Paper>
           <Paper mt={16} mb={16} withBorder radius="md" p="md">
             <Text pt={8} fz={26} fw={600} style={{ lineHeight: 1 }}>
