@@ -18,7 +18,7 @@ export const LoginComponent = () => {
   const navigate = useNavigate();
 
   const login = () => {
-    navigate(Routes.main);
+    navigate(Routes.profile);
   };
 
   return (

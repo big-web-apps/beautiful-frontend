@@ -15,13 +15,14 @@ export const MainScreen: React.FC<IMainScreenProps> = () => {
   return (
     <DefaultLayout>
       <Box pt={16}>
-        <BackgroundImage src={title} radius={'xs'} style={{ backgroundPositionY: '27%' }}>
-          <Stack justify={'center'} align={'center'} p={32} style={{ backgroundColor: 'rgba(0,0,0,0.5)', height: 550 }}>
+        <BackgroundImage src={title} radius={30} sx={{ backgroundPositionY: '27%' }}>
+          <Stack justify={'center'}  p={32} style={{ backgroundColor: 'rgba(0,0,0,0.5)', height: 550, borderRadius: 30 }}>
             <Text c={theme.white} fz={64}>
               Железобетонные инвестиции
             </Text>
-            <Text c={theme.white} fz={24}>
-              Инфляция всегда преследовала Вас, но мы оказались быстрее
+            <Text c={theme.white} fz={24} ta={'left'} sx={{maxWidth: '450px', lineHeight: 1.4}}>
+              Инфляция всегда преследовала Вас,
+              но мы оказались быстрее
             </Text>
           </Stack>
         </BackgroundImage>
