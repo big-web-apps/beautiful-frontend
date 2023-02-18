@@ -48,6 +48,7 @@ export class FilterStore {
         this.classes,
       )
       .then(({ count, results }) => {
+        console.log(results);
         if (this.currentItemsOffset) {
           this.setCurrentItems([...this.currentItems, ...results]);
         } else {
