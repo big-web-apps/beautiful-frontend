@@ -1,10 +1,12 @@
 import { $api, API_URL } from '../../base/http/AxiosInstance';
 import { ObjectModel } from '../../screens/object/ObjectData';
+import { ApartModel } from './models/ApartModel';
 
 export const filterEndpoints = {
   GET_FLATS: (offset: number) => `${API_URL}filteredflats?offset=${offset}`,
   GET_FLAT: (id: number) => `${API_URL}flats/${id}`,
   GET_REGIONS: () => `${API_URL}getallregions`,
+  GET_APARTS: () => `${API_URL}apartmentcomplexes`,
 };
 
 export class FilterService {
@@ -44,6 +46,12 @@ export class FilterService {
 
   async getRegions(): Promise<string[]> {
     const { data } = await $api.get(filterEndpoints.GET_REGIONS());
+
+    return data;
+  }
+
+  async getAparts(): Promise<ApartModel[]> {
+    const { data } = await $api.get(filterEndpoints.GET_APARTS());
 
     return data;
   }

@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { FilterService } from './FilterService';
 import { ObjectModel } from '../../screens/object/ObjectData';
+import { ApartModel } from './models/ApartModel';
 
 export class FilterStore {
   static LIMIT = 12;
@@ -17,6 +18,8 @@ export class FilterStore {
   classes: string[] = ['Комфорт', 'Элит', 'Стандарт', 'Бизнес'];
   chooseDistricts: string[] = [];
   chooseClasses: string[] = [];
+
+  apartments: ApartModel[] = [];
 
   currentItems: ObjectModel[] = [];
   currentItem: ObjectModel | null = null;
@@ -92,6 +95,19 @@ export class FilterStore {
       });
   };
 
+  getAparts = () => {
+    this.setLoading(true);
+
+    this.filterService
+      .getAparts()
+      .then(item => {
+        this.setApartments(item);
+      })
+      .finally(() => {
+        this.setLoading(false);
+      });
+  };
+
   setLoading = (value: boolean) => {
     this.loading = value;
   };
@@ -150,6 +166,10 @@ export class FilterStore {
 
   setRegionsLoading = (value: boolean) => {
     this.regionsLoading = value;
+  };
+
+  setApartments = (value: ApartModel[]) => {
+    this.apartments = value;
   };
 
   resetStore = () => {
