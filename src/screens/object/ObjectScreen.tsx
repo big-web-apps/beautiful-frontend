@@ -25,6 +25,7 @@ import { comments, data } from './ObjectData';
 import { CommentHtml } from './components/Comment';
 import { useRootStore } from '../../base/RootStore';
 import { observer } from 'mobx-react-lite';
+import { rent } from '../stat/components/data';
 
 export const ObjectScreen: React.FC = observer(() => {
   const { filterStore } = useRootStore();
@@ -155,55 +156,107 @@ export const ObjectScreen: React.FC = observer(() => {
             <Text pb={16} fw={600} fz={28}>
               Что мы думаем?
             </Text>
-            <List
-              spacing="md"
-              size="lg"
-              center
-              icon={
-                <ThemeIcon color="teal" size={24} radius="xl">
-                  <Check />
-                </ThemeIcon>
-              }
-            >
-              <List.Item>Развивающийся район, множество строек вокруг</List.Item>
-              <List.Item>Надежный застройщик, менее 1% задержек при сдаче</List.Item>
-              <List.Item
-                icon={
-                  <ThemeIcon color="yellow" size={24} radius="xl">
-                    <ExclamationMark />
-                  </ThemeIcon>
-                }
-              >
-                Постоянные пробки сейчас
-              </List.Item>
-              <List.Item
-                icon={
-                  <ThemeIcon color="yellow" size={24} radius="xl">
-                    <ExclamationMark />
-                  </ThemeIcon>
-                }
-              >
-                Плохо развит общественный транспорт сейчас
-              </List.Item>
-              <List.Item
-                icon={
-                  <ThemeIcon color="blue" size={24} radius="xl">
-                    <Report />
-                  </ThemeIcon>
-                }
-              >
-                Сейчас поблизости строют новую школу
-              </List.Item>
-              <List.Item
-                icon={
-                  <ThemeIcon color="blue" size={24} radius="xl">
-                    <Report />
-                  </ThemeIcon>
-                }
-              >
-                По генплану в пределах 1,5 км планируется трамвайная линия
-              </List.Item>
-            </List>
+            <Grid gutter={40}>
+              <Grid.Col span={6}>
+                <List
+                  spacing="md"
+                  size="lg"
+                  center
+                  icon={
+                    <ThemeIcon color="teal" size={24} radius="xl">
+                      <Check />
+                    </ThemeIcon>
+                  }
+                >
+                  <List.Item>Развивающийся район, множество строек вокруг</List.Item>
+                  <List.Item>Надежный застройщик, менее 1% задержек при сдаче</List.Item>
+                  <List.Item
+                    icon={
+                      <ThemeIcon color="yellow" size={24} radius="xl">
+                        <ExclamationMark />
+                      </ThemeIcon>
+                    }
+                  >
+                    Постоянные пробки сейчас
+                  </List.Item>
+                  <List.Item
+                    icon={
+                      <ThemeIcon color="yellow" size={24} radius="xl">
+                        <ExclamationMark />
+                      </ThemeIcon>
+                    }
+                  >
+                    Плохо развит общественный транспорт сейчас
+                  </List.Item>
+                  <List.Item
+                    icon={
+                      <ThemeIcon color="blue" size={24} radius="xl">
+                        <Report />
+                      </ThemeIcon>
+                    }
+                  >
+                    Сейчас поблизости строют новую школу
+                  </List.Item>
+                  <List.Item
+                    icon={
+                      <ThemeIcon color="blue" size={24} radius="xl">
+                        <Report />
+                      </ThemeIcon>
+                    }
+                  >
+                    По генплану в пределах 1,5 км планируется трамвайная линия
+                  </List.Item>
+                </List>
+              </Grid.Col>
+              <Grid.Col span={6}>
+                {currentItem?.price && currentItem?.rooms && (
+                  <Card shadow="sm" p="lg" radius="md" withBorder style={{ minHeight: '100%' }}>
+                    <Text fz={20}>Прогноз окупаемости аренды:</Text>
+                    <List pt={4} size={'lg'}>
+                      <List.Item> {TextHelper.getPriceString(currentItem?.price)} - стоимость квартиры</List.Item>
+                      <List.Item>
+                        {TextHelper.getPriceString(currentItem?.price / 10)} - стоимость ремонта (10% от стоимости
+                        квартиры)
+                      </List.Item>
+                      <List.Item>
+                        {TextHelper.getPriceString(
+                          rent[(currentItem?.districts as any) || ('' as any)][currentItem.rooms - 1],
+                        )}{' '}
+                        - средняя стоимость сдачи в районе {currentItem?.districts}
+                      </List.Item>
+                    </List>
+                    <Text pt={10} fz={14}>
+                      {TextHelper.getPriceString(currentItem?.price)} +{' '}
+                      {TextHelper.getPriceString(currentItem?.price / 10)} /{' '}
+                      {TextHelper.getPriceString(
+                        rent[(currentItem?.districts as any) || ('' as any)][currentItem.rooms - 1],
+                      )}{' '}
+                      =
+                    </Text>
+                    <Text pt={2} fz={30} c={theme.colors.green[5]}>
+                      {currentItem?.price &&
+                        TextHelper.getYearsNumFormat(
+                          Number(
+                            currentItem.price /
+                              12 /
+                              rent[(currentItem?.districts as any) || ('' as any)][currentItem.rooms - 1].toFixed(0),
+                          ),
+                          'ru',
+                        )}
+                    </Text>
+                    <Text fz={16} c={theme.colors.green[5]}>
+                      {currentItem?.price &&
+                        (
+                          currentItem.price /
+                          rent[(currentItem?.districts as any) || ('' as any)][currentItem.rooms - 1]
+                        ).toFixed(0)}{' '}
+                      месяцев
+                    </Text>
+                  </Card>
+                )}
+                <Text>{}</Text>
+              </Grid.Col>
+            </Grid>
             <Text pt={32} fw={600} fz={28}>
               А что Вы думаете?
             </Text>

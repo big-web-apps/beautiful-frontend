@@ -8,7 +8,6 @@ import {
   Group,
   MultiSelect,
   RangeSlider,
-  Stack,
   Text,
   useMantineTheme,
 } from '@mantine/core';
@@ -107,10 +106,12 @@ export const Filters: React.FC<IFiltersProps> = props => {
                   value={props.roomsValue}
                   onChange={props.setRoomsValue}
                   min={1}
-                  max={5}
+                  max={3}
+                  step={1}
+                  minRange={0}
                   marks={[
                     { value: 1, label: '1' },
-                    { value: 5, label: '5' },
+                    { value: 3, label: '3' },
                   ]}
                   size={'lg'}
                 />
@@ -177,7 +178,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
           </Button>
         </Grid.Col>
         <Grid.Col span={4}>
-          <Button radius={'md'}  leftIcon={<LockOpen />} color={'yellow'} fullWidth p={8} style={{ height: '100%' }}>
+          <Button radius={'md'} leftIcon={<LockOpen />} color={'yellow'} fullWidth p={8} style={{ height: '100%' }}>
             <Box sx={{ width: '100%' }}>
               <Text size={'lg'}>Средний риск</Text>
               <Text size={'sm'} sx={{ lineHeight: 1.3 }}>
@@ -188,7 +189,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
           </Button>
         </Grid.Col>
         <Grid.Col span={4}>
-          <Button radius={'md'}  leftIcon={<LockOff />} color={'red'} fullWidth p={8} style={{ height: '100%' }}>
+          <Button radius={'md'} leftIcon={<LockOff />} color={'red'} fullWidth p={8} style={{ height: '100%' }}>
             <Box>
               <Text size={'lg'}>Максимальный риск</Text>
               <Text size={'sm'} sx={{ lineHeight: 1.3 }}>

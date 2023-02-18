@@ -9204,3 +9204,13 @@ export const dataSell3 = {
 export const dataSells = [dataSell1, dataSell2, dataSell3];
 
 export const dataRents = [dataRent1, dataRent2, dataRent3];
+
+export const rent: any = {
+  ХБК: [25242, 30000, 37000],
+  ЭНКА: [18086, 23989, 35000],
+  ГМР: [16417, 20398, 24417],
+  РМЗ: [20307, 25600, 32000],
+  Новознаменский: [13879, 17000, 22000],
+  Северный: [14206, 18000, 23000],
+  'мкр. 9-й километр': [19960, 22000, 26000],
+};
