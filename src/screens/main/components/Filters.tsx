@@ -101,7 +101,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
         </Grid.Col>
         <Grid.Col px={16} mt={16} span={4}>
           <Button fullWidth onClick={props.toggleDrawer} leftIcon={<Map2 />} style={{ minHeight: '100%' }}>
-            Открыть карту
+            <Text fz={20}>Открыть карту</Text>
           </Button>
         </Grid.Col>
       </Grid>
