@@ -17,11 +17,11 @@ const ObjectManagerContainer: FC<ObjectManagerContainerProps> =
       <>
         <ObjectManager
           options={{
-            // clusterize: true,
-            // gridSize: 100,
+            clusterize: true,
+            gridSize: 100,
           }}
           clusters={{
-            // preset: 'islands#blueClusterIcons',
+            preset: 'islands#nightClusterIcons',
           }}
 
           features={ features }

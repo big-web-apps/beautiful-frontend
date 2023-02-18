@@ -8,6 +8,7 @@ import marker from './../../assets/images/Marker.svg'
 
 interface EstateMapI {
   mapPolygonColors: string [];
+  prices: number[]
 }
 
 
@@ -38,12 +39,12 @@ const EstateMap: React.FC<EstateMapI> = (props) => {
               ]
             },
             "properties": {
-              hintContent: item.name
+              hintContent: item.name,
             },
             "options": {
               iconLayout: "default#image",
               iconImageHref: marker,
-              iconImageSize: [70, 90],
+              iconImageSize: [40, 60],
             },
             "modules": [
               'geoObject.addon.balloon',
@@ -74,11 +75,12 @@ const EstateMap: React.FC<EstateMapI> = (props) => {
 
 
   return (
-    <div style={{position: 'relative', height: "500px"}}>
+    <div style={{position: 'relative', height: "95%"}}>
       <MapContainer
         mapPolygonColors={props.mapPolygonColors}
         state={{center: [45.035470, 38.975313], zoom: 12}}
         features={features}
+        prices={props.prices}
       />
     </div>
   );

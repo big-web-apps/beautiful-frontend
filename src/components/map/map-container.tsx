@@ -1,8 +1,7 @@
-import React, {FC, useState} from 'react'
-import {Placemark, Polygon, YMaps, Map} from '@pbe/react-yandex-maps'
+import React, {FC} from 'react'
+import {Polygon, YMaps, Map} from '@pbe/react-yandex-maps'
 
 import districts from './map.json'
-import { dataSell1 } from './../../screens/stat/components/data'
 import ObjectManagerContainer from './object-manager-container'
 
 interface MapContainerProps {
@@ -16,7 +15,8 @@ interface MapContainerProps {
   objectManagerFilter?: any,
   onPlaceMarkClick?: any,
   isLoading?: boolean,
-  mapPolygonColors: string[]
+  mapPolygonColors: string[],
+  prices: number[]
 }
 
 const MapContainer: FC<MapContainerProps> = ({
@@ -27,16 +27,21 @@ const MapContainer: FC<MapContainerProps> = ({
                                                objectManagerFilter,
                                                onPlaceMarkClick,
                                                isLoading,
-                                               mapPolygonColors
-}) => {
+                                               mapPolygonColors,
+                                               prices
+                                             }) => {
+
+  function numberWithSpaces(x:number) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
 
 
   return (
     <>
       <YMaps>
-        <Map defaultState={state} width={width} height={height} >
+        <Map defaultState={state} width={width} height={height}>
           <ObjectManagerContainer
-            features={ features }
+            features={features}
             // objectManagerFilter={ objectManagerFilter }
             // onPlaceMarkClick={ onPlaceMarkClick }
           />
@@ -47,7 +52,8 @@ const MapContainer: FC<MapContainerProps> = ({
                   key={item.name}
                   geometry={item.geometry}
                   properties={{
-                    hintContent: item.name
+                    hintContent: item.name,
+                    balloonContent: numberWithSpaces(prices[index]) +  " ₽"
                   }}
                   options={{
                     strokeColor: "#4b0fff",
