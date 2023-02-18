@@ -21,11 +21,11 @@ const EstateMap: React.FC<EstateMapI> = (props) => {
   //Effects
 
   useEffect(() => {
-    if (!!filterStore.currentItems.length) {
+    if (!!filterStore.apartments.length) {
       let tempFeatures: any = []
-      console.log('HA: ', filterStore.currentItems)
+      console.log('HA: ', filterStore.apartments)
 
-      filterStore.currentItems.forEach((item, index) => {
+      filterStore.apartments.forEach((item, index) => {
         if (item !== null) {
           let tempElement = {
             "type": "Feature",
@@ -33,12 +33,12 @@ const EstateMap: React.FC<EstateMapI> = (props) => {
             "geometry": {
               "type": "Point",
               "coordinates": [
-                item.apartment_complex.latitude,
-                item.apartment_complex.longitude
+                item.latitude,
+                item.longitude
               ]
             },
             "properties": {
-              hintContent: item.apartment_complex.name
+              hintContent: item.name
             },
             "options": {
               iconLayout: "default#image",
@@ -61,11 +61,11 @@ const EstateMap: React.FC<EstateMapI> = (props) => {
       })
     }
 
-  }, [filterStore.currentItems])
+  }, [filterStore.apartments])
 
   useEffect(() => {
     filterStore.resetStore();
-    filterStore.getFlats();
+    filterStore.getAparts();
 
     return () => {
       filterStore.resetStore();
