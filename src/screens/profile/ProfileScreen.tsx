@@ -8,38 +8,6 @@ import { Avatar, Container, Group, Paper, Stack, Text, Title } from '@mantine/co
 import DefaultLayout from '../../components/layouts/defaultLayout/DefaultLayout';
 import { observer } from 'mobx-react-lite';
 
-const data = [
-  {
-    title: 'ЖК Смородина',
-    address: 'Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7',
-    square: 37.65,
-    rooms: 1,
-    floor: '6-10',
-    category: 'Элит',
-    price: '4 860 615 ₽',
-    isLiked: true,
-  },
-  {
-    title: 'ЖК Смородина',
-    address: 'Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7',
-    square: 37.65,
-    rooms: 1,
-    floor: '6-10',
-    category: 'Элит',
-    price: '4 860 615 ₽',
-  },
-  {
-    title: 'ЖК Смородина',
-    address: 'Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7',
-    square: 37.65,
-    rooms: 1,
-    floor: '6-10',
-    category: 'Элит',
-    price: '4 860 615 ₽',
-    isLiked: true,
-  },
-];
-
 export const ProfileScreen = observer(() => {
   const { exampleStore, userStore } = useRootStore();
 

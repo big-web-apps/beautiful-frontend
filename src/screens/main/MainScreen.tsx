@@ -19,70 +19,75 @@ import { useRootStore } from '../../base/RootStore';
 import { observer } from 'mobx-react-lite';
 import { MapsDrawer } from './components/MapsDrawer';
 import EstateCard from '../../components/estate-card/EstateCard';
-import {dataSell1} from '../stat/components/data';
+import { dataSell1 } from '../stat/components/data';
 
 interface IMainScreenProps {}
 
 export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
   const { filterStore } = useRootStore();
-  const navigate = useNavigate();
-
   const theme = useMantineTheme();
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const [colors, setColors] = useState<string[]>([])
-
+  const [colors, setColors] = useState<string[]>([]);
 
   //Effects
   useEffect(() => {
-    filterStore.resetStore();
+    filterStore.setCurrentItemsOffset(0);
     filterStore.getFlats();
 
-    return () => {
+    /*return () => {
       filterStore.resetStore();
-    };
-  }, [filterStore.priceRange, filterStore.roomsRange, filterStore.squareRange]);
+    };*/
+  }, [
+    filterStore.priceRange,
+    filterStore.roomsRange,
+    filterStore.squareRange,
+    filterStore.districts,
+    filterStore.classes,
+  ]);
+
+  /*const handleChangeCountServer = useCallback(
+      debounce((itemId: number) => {
+        cartStore.changeServerCart(itemId);
+      }, 750),
+      [],
+  );*/
 
   //Handlers
   const handleToggleDrawer = () => {
     setOpenDrawer(prev => !prev);
-    countPolygonColors()
+    countPolygonColors();
   };
 
   const countPolygonColors = () => {
-    let prices: number[] = []
+    let prices: number[] = [];
 
     Object.values(dataSell1).map((item, index) => {
-      const t = item.data[0][1]
-      return (
-        prices.push(parseInt(t))
-      )
-    })
-    let maxPrice = Math.max(...prices)
-    console.log(maxPrice)
+      const t = item.data[0][1];
+      return prices.push(parseInt(t));
+    });
+    let maxPrice = Math.max(...prices);
 
-    let tempColors: string[] = []
+    let tempColors: string[] = [];
 
-    prices.forEach( (price) => {
-      let percentage = price * 100 / maxPrice
+    prices.forEach(price => {
+      let percentage = (price * 100) / maxPrice;
 
-      let R, G, B
-      if (percentage <= 50){
-        R = 255
-        G = (percentage / 50.0) * 255
+      let R, G, B;
+      if (percentage <= 50) {
+        R = 255;
+        G = (percentage / 50.0) * 255;
+      } else {
+        R = 255 - ((percentage - 50) / 50.0) * 255;
+        G = 255;
       }
-      else {
-        R = 255 - ((percentage - 50) / 50.0) * 255
-        G = 255
-      }
-      B = 0
+      B = 0;
 
-      tempColors.push('rgb(' + R + ',' + G + ',' + B + ')')
-    })
-    setColors([...tempColors])
-  }
-
+      tempColors.push('rgb(' + R + ',' + G + ',' + B + ')');
+    });
+    setColors([...tempColors]);
+  };
 
   const handleLoadMore = () => {
     filterStore.getFlats();
