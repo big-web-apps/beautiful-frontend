@@ -3,6 +3,7 @@ import { ObjectModel } from '../../screens/object/ObjectData';
 import { ApartModel } from './models/ApartModel';
 
 export const filterEndpoints = {
+  GET_ALL_FLATS: (offset: number) => `${API_URL}flats?offset=${offset}`,
   GET_FLATS: (offset: number) => `${API_URL}filteredflats?offset=${offset}`,
   GET_FLAT: (id: number) => `${API_URL}flats/${id}`,
   GET_REGIONS: () => `${API_URL}getallregions`,
@@ -36,6 +37,12 @@ export class FilterService {
     const { data } = await $api.get(filterEndpoints.GET_FLATS(offset), { params: filterData });
 
     return { results: data.results, count: data.count };
+  }
+
+  async getAllFlats(offset: number): Promise<ObjectModel[]> {
+    const { data } = await $api.get(filterEndpoints.GET_ALL_FLATS(offset));
+
+    return data.results;
   }
 
   async getFlat(id: number): Promise<ObjectModel> {

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ActionIcon, Badge, Button, Card, Group, Image, Text } from '@mantine/core';
-import { Heart } from 'tabler-icons-react';
+import { ArrowDownRight, ArrowUpRight, Heart } from 'tabler-icons-react';
 
 import img from './../../assets/images/image.png';
 import { Link } from 'react-router-dom';
@@ -34,9 +34,15 @@ const EstateCard: FC<IEstateCard> = props => {
         <Text mt={5} size={15} c={'gray.7'} inline sx={{ zIndex: 2, position: 'relative' }}>
           {data.apartment_complex.address}
         </Text>
-        <Text mt={30} mb={40} size={22} fw={500}>
+        <Text mt={30} size={22} fw={500}>
           {TextHelper.getPriceString(data.price)}
         </Text>
+        <Group mt={4} mb={20} align={'center'}>
+          <Text size={24} fw={600} c={data.coefficient && data.coefficient > 1 ? 'green' : 'red'}>
+            {data?.coefficient && data.coefficient.toFixed(2)}
+          </Text>
+          {data.coefficient && data.coefficient > 1 ? <ArrowUpRight size={24} /> : <ArrowDownRight size={24} />}
+        </Group>
         <Group position={'left'}>
           <Button>Перейти к объекту </Button>
         </Group>

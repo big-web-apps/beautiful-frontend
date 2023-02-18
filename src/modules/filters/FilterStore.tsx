@@ -25,6 +25,8 @@ export class FilterStore {
   currentItem: ObjectModel | null = null;
   currentItemsOffset: number = 0;
   currentItemsCount: number = 0;
+  popularItems: ObjectModel[] = [];
+  analyticItems: ObjectModel[] = [];
   private filterService: FilterService;
 
   constructor() {
@@ -65,6 +67,32 @@ export class FilterStore {
       .finally(() => {
         this.setLoading(false);
         this.setLoadingMore(false);
+      });
+  };
+
+  getPopular = () => {
+    this.setLoading(true);
+
+    this.filterService
+      .getAllFlats(500)
+      .then(item => {
+        this.setPopularItems(item);
+      })
+      .finally(() => {
+        this.setLoading(false);
+      });
+  };
+
+  getAnalytic = () => {
+    this.setLoading(true);
+
+    this.filterService
+      .getAllFlats(238)
+      .then(item => {
+        this.setAnalyticItems(item);
+      })
+      .finally(() => {
+        this.setLoading(false);
       });
   };
 
@@ -153,6 +181,14 @@ export class FilterStore {
 
   setCurrentItem = (value: ObjectModel | null) => {
     this.currentItem = value;
+  };
+
+  setPopularItems = (value: ObjectModel[]) => {
+    this.popularItems = value;
+  };
+
+  setAnalyticItems = (value: ObjectModel[]) => {
+    this.analyticItems = value;
   };
 
   setCurrentItemsOffset = (value: number) => {

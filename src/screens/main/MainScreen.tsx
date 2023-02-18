@@ -53,12 +53,12 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
   useEffect(() => {
     filterStore.getRegions();
     filterStore.getAparts();
+    filterStore.getPopular();
   }, []);
 
   useEffect(() => {
     if (!!filterStore.apartments.length) {
       console.log(filterStore.apartments);
-
     }
   }, [filterStore.apartments]);
 
@@ -83,7 +83,7 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
       const t = item.data[0][1];
       return tempPrices.push(parseInt(t));
     });
-    setPrices(tempPrices)
+    setPrices(tempPrices);
     let maxPrice = Math.max(...tempPrices);
 
     let tempColors: string[] = [];
@@ -171,6 +171,24 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
               <Loader />
             </Center>
           )}
+        </Box>
+        <Text fw={500} fz={32} pt={60} pb={30}>
+          Популярное
+        </Text>
+        <Box mt={40} pos={'relative'}>
+          <Center>
+            <LoadingOverlay pos={'absolute'} visible={filterStore.loading} />
+          </Center>
+          <Grid style={{ minHeight: 50 }}>
+            {!!filterStore?.popularItems?.length &&
+              filterStore.popularItems?.map(data => {
+                return (
+                  <Grid.Col key={data.id} span={4}>
+                    <EstateCard data={data} />
+                  </Grid.Col>
+                );
+              })}
+          </Grid>
         </Box>
         <MapsDrawer prices={prices} mapPolygonColors={colors} isOpen={openDrawer} toggleDrawer={handleToggleDrawer} />
       </Box>

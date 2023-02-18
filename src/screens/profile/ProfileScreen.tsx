@@ -1,33 +1,19 @@
-import { signOut } from 'firebase/auth';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../base/firebase/firebase-config';
 import { useRootStore } from '../../base/RootStore';
-import { Routes } from '../../routes/routes';
-import { Avatar, Container, Group, Paper, Stack, Text, Title } from '@mantine/core';
+import { Avatar, Box, Center, Container, Grid, Group, LoadingOverlay, Paper, Stack, Text, Title } from '@mantine/core';
 import DefaultLayout from '../../components/layouts/defaultLayout/DefaultLayout';
 import { observer } from 'mobx-react-lite';
+import EstateCard from '../../components/estate-card/EstateCard';
 
 export const ProfileScreen = observer(() => {
-  const { exampleStore, userStore } = useRootStore();
-
-  const navigate = useNavigate();
+  const { filterStore } = useRootStore();
 
   //Effects
   useEffect(() => {
-    exampleStore.getBeerItem('1');
+    filterStore.getPopular();
+    filterStore.getAnalytic();
   }, []);
-
-  useEffect(() => {
-    console.log(exampleStore.beerItem);
-  }, [exampleStore.beerItem]);
-
-  //Handlers
-  const handleLogout = () => {
-    signOut(auth);
-    userStore.resetStore();
-    navigate(Routes.auth);
-  };
 
   //Renders
   return (
@@ -58,17 +44,43 @@ export const ProfileScreen = observer(() => {
           Расширенная аналитика
         </Text>
         <Group grow>
-          {/*{data.map(data => {
-            return <EstateCard data={data} />;
-          })}*/}
+          <Group grow>
+            <Box pos={'relative'}>
+              <Center>
+                <LoadingOverlay pos={'absolute'} visible={filterStore.loading} />
+              </Center>
+              <Grid style={{ minHeight: 50 }}>
+                {!!filterStore?.analyticItems?.length &&
+                  filterStore.analyticItems.slice(0, 3)?.map(data => {
+                    return (
+                      <Grid.Col key={data.id} span={4}>
+                        <EstateCard data={data} />
+                      </Grid.Col>
+                    );
+                  })}
+              </Grid>
+            </Box>
+          </Group>
         </Group>
         <Text size={26} fw={600} my={35}>
           Избранное
         </Text>
         <Group grow>
-          {/*{data.map(data => {
-            return <EstateCard data={data} />;
-          })}*/}
+          <Box pos={'relative'}>
+            <Center>
+              <LoadingOverlay pos={'absolute'} visible={filterStore.loading} />
+            </Center>
+            <Grid style={{ minHeight: 50 }}>
+              {!!filterStore?.popularItems?.length &&
+                filterStore.popularItems?.map(data => {
+                  return (
+                    <Grid.Col key={data.id} span={4}>
+                      <EstateCard data={data} />
+                    </Grid.Col>
+                  );
+                })}
+            </Grid>
+          </Box>
         </Group>
         {/*<Button onClick={handleLogout}>Logout</Button>*/}
       </Container>
