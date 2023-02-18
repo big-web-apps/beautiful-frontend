@@ -14,7 +14,7 @@ export const MapsDrawer: React.FC<IMapsDrawerProps> = props => {
   //Render
   return (
     <>
-      <Drawer opened={props.isOpen} onClose={props.toggleDrawer} title="Карта" padding="xl" size={'60%'}>
+      <Drawer opened={props.isOpen} onClose={props.toggleDrawer} title="Порайонная динамика цены" padding="xl" size={'60%'}>
         {/* Drawer content */}
         <EstateMap mapPolygonColors={props.mapPolygonColors} />
       </Drawer>
