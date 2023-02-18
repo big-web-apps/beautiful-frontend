@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Grid, MultiSelect, RangeSlider, Text, useMantineTheme } from '@mantine/core';
+import { Button, Card, Grid, MultiSelect, RangeSlider, Text, useMantineTheme } from '@mantine/core';
+import { Map2 } from 'tabler-icons-react';
 
 interface IFiltersProps {
   priceValue: [number, number];
@@ -12,6 +13,7 @@ interface IFiltersProps {
   setClassesValue: (value: string[]) => void;
   districtValue: string[];
   setDistrictValue: (value: string[]) => void;
+  toggleDrawer: () => void;
 }
 
 export const Filters: React.FC<IFiltersProps> = props => {
@@ -96,6 +98,11 @@ export const Filters: React.FC<IFiltersProps> = props => {
             withinPortal
             placeholder="Выберите классы"
           />
+        </Grid.Col>
+        <Grid.Col px={16} mt={16} span={4}>
+          <Button fullWidth onClick={props.toggleDrawer} leftIcon={<Map2 />} style={{ minHeight: '100%' }}>
+            Открыть карту
+          </Button>
         </Grid.Col>
       </Grid>
     </Card>
