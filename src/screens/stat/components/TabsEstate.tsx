@@ -13,13 +13,13 @@ export const TabsEstate: React.FC<ITabsEstateProps> = props => {
   return (
     <Tabs pt={16} value={value} onTabChange={setValue}>
       <Tabs.List grow>
-        <Tabs.Tab value="1">
+        <Tabs.Tab value="0">
           <Text size={18}>1-комнатные</Text>
         </Tabs.Tab>
-        <Tabs.Tab value="2">
+        <Tabs.Tab value="1">
           <Text size={18}>2-комнатные</Text>
         </Tabs.Tab>
-        <Tabs.Tab value="3">
+        <Tabs.Tab value="2">
           <Text size={18}>3-комнатные</Text>
         </Tabs.Tab>
       </Tabs.List>

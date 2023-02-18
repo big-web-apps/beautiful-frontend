@@ -11,7 +11,7 @@ import {
   ChartOptions,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { Loader, Stack, Text } from '@mantine/core';
+import { Loader, Stack } from '@mantine/core';
 import { ColorHelper } from '../../../helpers/ColorHelper';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -58,7 +58,7 @@ export const StateEstate: React.FC<ICompetenciesChartProps> = props => {
   //Effects
   useEffect(() => {
     handleChartData();
-  }, []);
+  }, [data]);
 
   //Handlers
   const handleChartData = () => {
@@ -82,7 +82,7 @@ export const StateEstate: React.FC<ICompetenciesChartProps> = props => {
             }),
           borderColor: color,
           backgroundColor: color,
-          hidden: [0, 1, 2].includes(index) ? false : true,
+          hidden: ![0, 1, 2].includes(index),
           cubicInterpolationMode: 'monotone',
           tension: 0.4,
         });

@@ -5,7 +5,7 @@ import DefaultLayout from '../../components/layouts/defaultLayout/DefaultLayout'
 import { StateEstate } from './components/StatEstate';
 import { StatsRing } from './components/StatsRing';
 import { ArrowDownRight, ArrowUpRight } from 'tabler-icons-react';
-import { dataSell } from './components/data';
+import { dataRents, dataSells } from './components/data';
 import { TabsEstate } from './components/TabsEstate';
 
 interface IMainScreenProps {}
@@ -15,7 +15,8 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
 
   const theme = useMantineTheme();
 
-  const [sellValue, setSellValue] = useState<string>('1');
+  const [sellValue, setSellValue] = useState<string>('0');
+  const [rentValue, setRentValue] = useState<string>('0');
 
   const data = [
     {
@@ -52,7 +53,7 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
   return (
     <DefaultLayout>
       <Container size={'xl'}>
-        <Text size={26} my={35} weight={500}>
+        <Text size={26} py={40} weight={700}>
           Статистика
         </Text>
         <StatsRing data={data} />
@@ -63,8 +64,9 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
           <Grid.Col span={4}>
             <Card shadow="sm" p="lg" radius="md" withBorder style={{ minHeight: '100%' }}>
               <Text fz={16} fw={300} style={{ lineHeight: 1.1 }}>
-                Цены на недвижимость на пике, <u>не рекомендуем</u> вкладываться в ближайшее время в <u>готовое жилье</u>. Но
-                стоит рассмотреть варианты на уровне котлована или же другие источники (торги, земельные участки).
+                Цены на недвижимость на пике, <u>не рекомендуем</u> вкладываться в ближайшее время в{' '}
+                <u>готовое жилье</u>. Но стоит рассмотреть варианты на уровне котлована или же другие источники (торги,
+                земельные участки).
               </Text>
             </Card>
           </Grid.Col>
@@ -84,26 +86,28 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
             </Card>
           </Grid.Col>
         </Grid>
-        <Paper mt={60} withBorder radius="md" p="md">
-          <Text pt={8} fz={26} fw={500} style={{ lineHeight: 1 }}>
-            Продажа недвижимости
-          </Text>
-          <Text py={8} fz={'sm'} fw={300} style={{ lineHeight: 1 }}>
-            Выберите нужные районы, чтобы отразить их на графике
-          </Text>
-          <TabsEstate value={sellValue} setValue={setSellValue} />
-          <StateEstate data={dataSell} />
-        </Paper>
-        <Paper mt={60} withBorder radius="md" p="md">
-          <Text pt={8} fz={26} fw={500} style={{ lineHeight: 1 }}>
-            Аренда недвижимости
-          </Text>
-          <Text py={8} fz={'sm'} fw={300} style={{ lineHeight: 1 }}>
-            Выберите нужные районы, чтобы отразить их на графике
-          </Text>
-          <TabsEstate value={sellValue} setValue={setSellValue} />
-          <StateEstate data={dataSell} />
-        </Paper>
+        <div>
+          <Paper mt={24} withBorder radius="md" p="md">
+            <Text pt={8} fz={26} fw={600} style={{ lineHeight: 1 }}>
+              Продажа недвижимости
+            </Text>
+            <Text py={8} fz={'sm'} fw={300} style={{ lineHeight: 1 }}>
+              Выберите нужные районы, чтобы отразить их на графике
+            </Text>
+            <TabsEstate value={sellValue} setValue={setSellValue} />
+            <StateEstate data={dataSells[Number(sellValue)]} />
+          </Paper>
+          <Paper mt={16} withBorder radius="md" p="md">
+            <Text pt={8} fz={26} fw={600} style={{ lineHeight: 1 }}>
+              Аренда недвижимости
+            </Text>
+            <Text py={8} fz={'sm'} fw={300} style={{ lineHeight: 1 }}>
+              Выберите нужные районы, чтобы отразить их на графике
+            </Text>
+            <TabsEstate value={rentValue} setValue={setRentValue} />
+            <StateEstate data={dataRents[Number(rentValue)]} />
+          </Paper>
+        </div>
       </Container>
     </DefaultLayout>
   );
