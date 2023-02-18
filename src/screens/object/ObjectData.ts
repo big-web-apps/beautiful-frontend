@@ -50,8 +50,8 @@ export interface apartment_complex {
   address: string | null;
   class_type: string | null;
   image: string | null;
-  latitude: number | null;
-  longitude: number | null;
+  latitude: number;
+  longitude: number;
 }
 
 export const data: ObjectModel = {

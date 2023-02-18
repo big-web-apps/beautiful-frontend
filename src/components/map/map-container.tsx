@@ -19,8 +19,6 @@ interface MapContainerProps {
   mapPolygonColors: string[]
 }
 
-
-
 const MapContainer: FC<MapContainerProps> = ({
                                                state = {center: [45.035470, 38.975313], zoom: 14},
                                                width = '100%',
@@ -39,8 +37,8 @@ const MapContainer: FC<MapContainerProps> = ({
         <Map defaultState={state} width={width} height={height} >
           <ObjectManagerContainer
             features={ features }
-            objectManagerFilter={ objectManagerFilter }
-            onPlaceMarkClick={ onPlaceMarkClick }
+            // objectManagerFilter={ objectManagerFilter }
+            // onPlaceMarkClick={ onPlaceMarkClick }
           />
           {
             districts.data.map((item, index) => {

@@ -1,5 +1,5 @@
 import { ActionIcon, Button, Container, createStyles, Group, Header as MantineHeader } from '@mantine/core';
-import { BrandReact, Plus } from 'tabler-icons-react';
+import {BrandReact, PigMoney, Plus} from 'tabler-icons-react';
 import { ColorSchemeButton } from '../../ColorSchemeButton';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { NavLinks, Routes } from '../../../routes/routes';
@@ -26,8 +26,8 @@ const DefaultLayout = (props: { children: JSX.Element }) => {
       <MantineHeader height={55} fixed={true}>
         <Container size={'xl'} className={classes.inner}>
           <Group align={'stretch'}>
-            <ActionIcon size={'xl'}>
-              <BrandReact size={40} />
+            <ActionIcon size={'xl'} variant={'transparent'}>
+              <PigMoney size={48} strokeWidth={1.5} color={'black'}/>
             </ActionIcon>
             {renderDesktopNavList()}
           </Group>
