@@ -64,8 +64,9 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
           <Grid.Col span={4}>
             <Card shadow="sm" p="lg" radius="md" withBorder style={{ minHeight: '100%' }}>
               <Text fz={16} fw={300} style={{ lineHeight: 1.1 }}>
-                Цены на недвижимость на пике, <u>не рекомендуем</u> вкладываться в ближайшее время в <u>готовое жилье</u>. Но
-                стоит рассмотреть варианты на уровне котлована или же другие источники (торги, земельные участки).
+                Цены на недвижимость на пике, <u>не рекомендуем</u> вкладываться в ближайшее время в{' '}
+                <u>готовое жилье</u>. Но стоит рассмотреть варианты на уровне котлована или же другие источники (торги,
+                земельные участки).
               </Text>
             </Card>
           </Grid.Col>
@@ -86,7 +87,7 @@ export const StatScreen: React.FC<IMainScreenProps> = () => {
           </Grid.Col>
         </Grid>
         <div>
-          <Paper mt={16} withBorder radius="md" p="md">
+          <Paper mt={24} withBorder radius="md" p="md">
             <Text pt={8} fz={26} fw={600} style={{ lineHeight: 1 }}>
               Продажа недвижимости
             </Text>
