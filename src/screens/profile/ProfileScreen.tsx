@@ -9,6 +9,38 @@ import DefaultLayout from '../../components/layouts/defaultLayout/DefaultLayout'
 import { observer } from 'mobx-react-lite';
 import EstateCard from '../../components/estate-card/EstateCard';
 
+const data = [
+  {
+    title: "ЖК Смородина",
+    address: "Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7",
+    square: 37.65,
+    rooms: 1,
+    floor: "6-10",
+    category: "Элит",
+    price: "4 860 615 ₽",
+    isLiked: true
+  },
+  {
+    title: "ЖК Смородина",
+    address: "Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7",
+    square: 37.65,
+    rooms: 1,
+    floor: "6-10",
+    category: "Элит",
+    price: "4 860 615 ₽",
+  },
+  {
+    title: "ЖК Смородина",
+    address: "Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7",
+    square: 37.65,
+    rooms: 1,
+    floor: "6-10",
+    category: "Элит",
+    price: "4 860 615 ₽",
+    isLiked: true
+  }
+]
+
 export const ProfileScreen = observer(() => {
   const { exampleStore, userStore } = useRootStore();
 
@@ -45,9 +77,37 @@ export const ProfileScreen = observer(() => {
         </Paper>
         <Text size={26} fw={500} my={35}>Портфель</Text>
         <Group grow>
-          <EstateCard />
-          <EstateCard />
-          <EstateCard />
+          {
+            data.map((data) => {
+              return <EstateCard
+                title={data.title}
+                address={data.address}
+                square={data.square}
+                rooms={data.rooms}
+                floor={data.floor}
+                category={data.category}
+                price={data.price}
+                isLiked={false}
+              />
+            })
+          }
+        </Group>
+        <Text size={26} fw={500} my={35}>Избранное</Text>
+        <Group grow>
+          {
+            data.map((data) => {
+              return <EstateCard
+                title={data.title}
+                address={data.address}
+                square={data.square}
+                rooms={data.rooms}
+                floor={data.floor}
+                category={data.category}
+                price={data.price}
+                isLiked={true}
+              />
+            })
+          }
         </Group>
         {/*<Button onClick={handleLogout}>Logout</Button>*/}
       </Container>

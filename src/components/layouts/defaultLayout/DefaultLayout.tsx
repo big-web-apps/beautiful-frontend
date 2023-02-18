@@ -77,7 +77,7 @@ const DefaultLayout = (props: { children: JSX.Element }) => {
   return (
     <>
       {isMD ? renderDesktopMenu() : renderMobileMenu()}
-      <Container size={'xl'} pt={70}>
+      <Container size={'xl'} py={70}>
         {props.children}
       </Container>
     </>
