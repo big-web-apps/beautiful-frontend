@@ -7,7 +7,7 @@ import {
   Grid,
   Group,
   MultiSelect,
-  RangeSlider,
+  RangeSlider, Stack,
   Text,
   useMantineTheme,
 } from '@mantine/core';
@@ -165,18 +165,18 @@ export const Filters: React.FC<IFiltersProps> = props => {
           <Button leftIcon={<ShieldLock />} color={'green'} fullWidth p={8} style={{ height: '100%' }}>
             <Box>
               <Text size={'lg'}>Минимум риска</Text>
-              <Text size={'sm'} style={{ height: '100%' }}>
-                Покупка жилья, которое уже сдано или близко к его сдаче. Только от крупных застройщиков.
+              <Text size={'sm'} sx={{lineHeight: 1.3}}>
+                Покупка жилья, которое уже сдано<br/> или близко к его сдаче.<br/> Только от крупных застройщиков.
               </Text>
             </Box>
           </Button>
         </Grid.Col>
         <Grid.Col span={4}>
           <Button leftIcon={<LockOpen />} color={'yellow'} fullWidth p={8} style={{ height: '100%' }}>
-            <Box>
+            <Box sx={{width: '100%'}}>
               <Text size={'lg'}>Средний риск</Text>
-              <Text size={'sm'} style={{ height: '100%' }}>
-                Надежные застройщики на этапе строительства
+              <Text size={'sm'} sx={{lineHeight: 1.3 }}>
+                Надежные застройщики <br/>на этапе строительства
               </Text>
             </Box>
           </Button>
@@ -185,8 +185,8 @@ export const Filters: React.FC<IFiltersProps> = props => {
           <Button leftIcon={<LockOff />} color={'red'} fullWidth p={8} style={{ height: '100%' }}>
             <Box>
               <Text size={'lg'}>Максимальный риск</Text>
-              <Text size={'sm'} style={{ height: '100%' }}>
-                Покупка на котловане от застройщика, рекомендуем быть внимательными
+              <Text size={'sm'}  sx={{lineHeight: 1.3 }}>
+                Покупка на котловане от застройщика,<br/> рекомендуем быть внимательными
               </Text>
             </Box>
           </Button>
