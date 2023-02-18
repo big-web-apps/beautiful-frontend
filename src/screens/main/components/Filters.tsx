@@ -152,7 +152,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
   return (
     <Card mt={24} shadow="sm" p="lg" radius="md" withBorder style={{ minHeight: '100%' }}>
       <Group pb={16} position={'apart'}>
-        <Text fw={600} fz={32}>
+        <Text fw={500} fz={32}>
           Фильтры
         </Text>
         <Button onClick={props.toggleDrawer} leftIcon={<Map2 />} style={{ minHeight: '100%', width: 300 }}>
@@ -162,7 +162,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
 
       <Grid pb={32}>
         <Grid.Col span={4}>
-          <Button leftIcon={<ShieldLock />} color={'green'} fullWidth p={8} style={{ height: '100%' }}>
+          <Button radius={'md'} leftIcon={<ShieldLock />} color={'green'} fullWidth p={8} style={{ height: '100%' }}>
             <Box>
               <Text size={'lg'}>Минимум риска</Text>
               <Text size={'sm'} sx={{lineHeight: 1.3}}>
@@ -172,7 +172,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
           </Button>
         </Grid.Col>
         <Grid.Col span={4}>
-          <Button leftIcon={<LockOpen />} color={'yellow'} fullWidth p={8} style={{ height: '100%' }}>
+          <Button radius={'md'}  leftIcon={<LockOpen />} color={'yellow'} fullWidth p={8} style={{ height: '100%' }}>
             <Box sx={{width: '100%'}}>
               <Text size={'lg'}>Средний риск</Text>
               <Text size={'sm'} sx={{lineHeight: 1.3 }}>
@@ -182,7 +182,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
           </Button>
         </Grid.Col>
         <Grid.Col span={4}>
-          <Button leftIcon={<LockOff />} color={'red'} fullWidth p={8} style={{ height: '100%' }}>
+          <Button radius={'md'}  leftIcon={<LockOff />} color={'red'} fullWidth p={8} style={{ height: '100%' }}>
             <Box>
               <Text size={'lg'}>Максимальный риск</Text>
               <Text size={'sm'}  sx={{lineHeight: 1.3 }}>
