@@ -4,63 +4,52 @@ import { Heart } from 'tabler-icons-react';
 
 import img from './../../assets/images/image.png';
 import { Link } from 'react-router-dom';
+import { ObjectModel } from '../../screens/object/ObjectData';
+import { TextHelper } from '../../helpers/TextHelper';
 
-export interface EstateCardModel {
-  title: string;
-  address: string;
-  square: Number;
-  rooms: Number;
-  floor: string;
-  category: string;
-  price: string;
-  isLiked?: boolean;
+interface IEstateCard {
+  data: ObjectModel;
 }
 
-const EstateCard: FC<EstateCardModel> = ({
-  title,
-  address,
-  square,
-  rooms,
-  floor,
-  category,
-  price,
-  isLiked = false,
-}) => {
+const EstateCard: FC<IEstateCard> = props => {
+  const { data } = props;
+
   return (
-    <Link to={`/object/${rooms}`}>
+    <Link to={`/object/${data.id}`}>
       <Card shadow="sm" p="lg" radius="md" withBorder sx={{ position: 'relative', zIndex: 1 }}>
         <Group position={'apart'}>
           <Text size={20} fw={600} color={''}>
-            {rooms + '-комн. кв., ' + square + ' м², ' + floor + ' этаж'}
+            {data.rooms + '-комн. кв., ' + data.square + ' м², ' + data.floor + ' этаж'}
           </Text>
-          <ActionIcon radius={100} size={'lg'} color={'red'} variant={isLiked ? 'filled' : 'outline'}>
+          <ActionIcon radius={100} size={'lg'} color={'red'} variant={'filled'}>
             <Heart size={22} />
           </ActionIcon>
         </Group>
         <Badge mt={10} variant={'dot'}>
-          {category}
+          {data.apartment_complex.class_type}
         </Badge>
         <Text mt={30} size={15} c={'gray.7'}>
-          {title}
+          {data.apartment_complex.name}
         </Text>
         <Text mt={5} size={15} c={'gray.7'} inline sx={{ zIndex: 2, position: 'relative' }}>
-          {address}
+          {data.apartment_complex.address}
         </Text>
         <Text mt={30} mb={40} size={22} fw={500}>
-          {price}
+          {TextHelper.getPriceString(data.price)}
         </Text>
         <Group position={'left'}>
-          <Button>Перейти на сайт </Button>
+          <Button>Перейти к объекту </Button>
         </Group>
         <Image
-          src={img}
-          width={170}
+          src={data.image || img}
+          width={130}
           sx={{
             position: 'absolute',
-            bottom: -125,
-            right: -20,
+            bottom: 8,
+            right: 8,
             zIndex: 0,
-            opacity: 0.4,
+            opacity: 0.8,
+            objectFit: 'contain',
           }}
         />
       </Card>

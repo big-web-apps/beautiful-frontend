@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DefaultLayout from '../../components/layouts/defaultLayout/DefaultLayout';
 import {
   ActionIcon,
   Badge,
+  Box,
   Button,
   Card,
+  Center,
   Container,
   Grid,
   Group,
@@ -12,68 +14,46 @@ import {
   List,
   Slider,
   Text,
+  Textarea,
   ThemeIcon,
   useMantineTheme,
 } from '@mantine/core';
 import { useParams } from 'react-router-dom';
-import img from '../../assets/images/image.png';
-import { Check, ExclamationMark, Heart, Report } from 'tabler-icons-react';
+import { Check, ExclamationMark, Heart, PlayerRecord, Report, Send } from 'tabler-icons-react';
 import { TextHelper } from '../../helpers/TextHelper';
+import { comments, data } from './ObjectData';
+import { CommentHtml } from './components/Comment';
+import { useRootStore } from '../../base/RootStore';
+import { observer } from 'mobx-react-lite';
 
-interface ObjectModel {
-  apartment_complex: apartment_complex;
-  id: number | null;
-  rooms: number | null;
-  floor: number | null;
-  liter_name: string | null;
-  districts: string | null;
-  meter_price: number | null;
-  price: number | null;
-  url: string | null;
-  square: number | null;
-  living_square: number | null;
-  coefficient: number | null;
-}
-
-interface apartment_complex {
-  id: number | null;
-  name: string | null;
-  address: string | null;
-  class_type: string | null;
-  image: string | null;
-  latitude: number | null;
-  longitude: number | null;
-}
-
-const data: ObjectModel = {
-  id: 1,
-  apartment_complex: {
-    id: 2,
-    name: 'ЖК Малинки',
-    address: 'Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7',
-    class_type: 'elit',
-    image: 'sas',
-    latitude: 45,
-    longitude: 35,
-  },
-
-  square: 37.65,
-  rooms: 6,
-  floor: 7,
-  liter_name: 'фычсв',
-  districts: 'ГМР',
-  meter_price: 134455,
-  price: 56754346,
-  url: 'sas',
-  living_square: 20,
-  coefficient: 1.1,
-};
-
-export const ObjectScreen: React.FC = () => {
-  const params = useParams();
+export const ObjectScreen: React.FC = observer(() => {
+  const { filterStore } = useRootStore();
+  const { currentItem } = filterStore;
   const theme = useMantineTheme();
 
+  let { id } = useParams();
+
   const [years, setYears] = useState(1);
+  const [money, setMoney] = useState(0);
+
+  //Effects
+  useEffect(() => {
+    if (Number(id)) {
+      filterStore.getFlat(Number(id));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (currentItem?.coefficient && currentItem?.price) {
+      let price = currentItem?.price;
+
+      for (let i = 1; i <= years; i++) {
+        price = price * currentItem?.coefficient;
+      }
+
+      setMoney(price);
+    }
+  }, [currentItem?.price, years]);
 
   //Render
   return (
@@ -81,35 +61,37 @@ export const ObjectScreen: React.FC = () => {
       <Container pt={40} size={'xl'}>
         <Grid gutter={40}>
           <Grid.Col span={3}>
-            <Image src={img} width={'100%'} />
+            <Image src={currentItem?.image} width={'100%'} />
           </Grid.Col>
           <Grid.Col span={9}>
             <Group position={'apart'}>
               <Text fw={600} fz={40}>
-                {data.apartment_complex.name} ({data.districts})
+                {currentItem?.apartment_complex.name} ({currentItem?.districts})
               </Text>
               <ActionIcon radius={100} size={'xl'} color={'red'} variant={'outline'}>
                 <Heart size={22} />
               </ActionIcon>
             </Group>
-            <Text fz={24}>{data.apartment_complex.address}</Text>
+            <Text fz={24}>{currentItem?.apartment_complex.address}</Text>
             <Group>
-              <Text fz={20}>Литер: {data.liter_name}</Text>
+              <Text fz={20}>Литер: {currentItem?.liter_name}</Text>
               <Badge my={16} mt={10} variant={'dot'} size={'lg'}>
-                {data.apartment_complex.class_type}
+                {currentItem?.apartment_complex.class_type}
               </Badge>
             </Group>
 
             <Grid pt={16}>
               <Grid.Col pt={24} span={6}>
+                <Text fz={24}>{currentItem?.rooms} комн. кв.</Text>
                 <Text fz={24}>
-                  {data.rooms} комн. кв., {data.square} м² ({data.living_square} м²), {data.floor} этаж
+                  {currentItem?.square} м² ({currentItem?.living_square} м²),
                 </Text>
+                <Text fz={24}>{currentItem?.floor} этаж</Text>
 
                 <Text pt={16} fz={28}>
-                  {TextHelper.getPriceString(data.price)}
+                  {TextHelper.getPriceString(currentItem?.price)}
                 </Text>
-                <Text fz={20}>({TextHelper.getPriceString(data.meter_price)} /м²)</Text>
+                <Text fz={20}>({TextHelper.getPriceString(currentItem?.meter_price)} /м²)</Text>
               </Grid.Col>
               <Grid.Col span={6}>
                 <Card shadow="sm" p="lg" radius="md" withBorder style={{ minHeight: '100%' }}>
@@ -117,7 +99,7 @@ export const ObjectScreen: React.FC = () => {
                     Через {TextHelper.getYearsNumFormat(years, 'ru')} по нашим прогнозам цена на этот объект достигнет:
                   </Text>
                   <Text pt={8} fz={28} c={theme.colors.green[5]}>
-                    {TextHelper.getPriceString(99999999)}
+                    {TextHelper.getPriceString(money)}
                   </Text>
                   <Slider
                     min={1}
@@ -144,6 +126,30 @@ export const ObjectScreen: React.FC = () => {
             <Button mt={16} variant={'outline'} fullWidth size={'lg'}>
               Другие планировки
             </Button>
+            <Card shadow="sm" p="lg" my={32} radius="md" withBorder>
+              <Center>
+                <Text>Купите нашу продвинутую подписку и получите:</Text>
+              </Center>
+              <List
+                pt={16}
+                spacing="sm"
+                size="md"
+                center
+                icon={
+                  <ThemeIcon size={24} radius="xl">
+                    <PlayerRecord />
+                  </ThemeIcon>
+                }
+              >
+                <List.Item>Интерактивную карту генплана до 2040 года</List.Item>
+                <List.Item>Уведомления о снижении цены на избранные элементы</List.Item>
+                <List.Item>Безлимитное количество запросов</List.Item>
+                <List.Item>Расширенную аналитику от известных экспертов</List.Item>
+              </List>
+              <Button mt={24} fullWidth size={'lg'}>
+                Перейти к тарифам
+              </Button>
+            </Card>
           </Grid.Col>
           <Grid.Col span={9}>
             <Text pb={16} fw={600} fz={28}>
@@ -198,9 +204,35 @@ export const ObjectScreen: React.FC = () => {
                 По генплану в пределах 1,5 км планируется трамвайная линия
               </List.Item>
             </List>
+            <Text pt={32} fw={600} fz={28}>
+              А что Вы думаете?
+            </Text>
+            <Grid align={'end'}>
+              <Grid.Col span={11}>
+                <Textarea
+                  mt="md"
+                  label="Сообщение"
+                  placeholder="Ваше сообщение"
+                  minRows={1}
+                  autosize
+                  name="message"
+                  variant="filled"
+                />
+              </Grid.Col>
+              <Grid.Col span={1}>
+                <Button size="md" fullWidth>
+                  <Send />
+                </Button>
+              </Grid.Col>
+            </Grid>
+            <Box pt={24}>
+              {comments.map(item => (
+                <CommentHtml postedAt={item.postedAt} body={item.body} author={item.author} />
+              ))}
+            </Box>
           </Grid.Col>
         </Grid>
       </Container>
     </DefaultLayout>
   );
-};
+});
