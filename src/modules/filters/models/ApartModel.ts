@@ -1,7 +1,6 @@
 import { apartment_complex } from '../../../screens/object/ObjectData';
 
 export interface ApartModel {
-  apartment_complex: apartment_complex;
   id: number | null;
   name: string | null;
   address: string | null;
