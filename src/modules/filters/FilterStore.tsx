@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import { tempItems } from './data';
 
 export class FilterStore {
   loading = false;
@@ -9,6 +10,8 @@ export class FilterStore {
 
   districts: string[] = [];
   classes: string[] = [];
+
+  currentItems: any[] = tempItems;
 
   constructor() {
     makeAutoObservable(this);
@@ -36,6 +39,10 @@ export class FilterStore {
 
   setDistricts = (value: string[]) => {
     this.districts = value;
+  };
+
+  setCurrentItems = (value: any[]) => {
+    this.currentItems = value;
   };
 
   resetStore = () => {};

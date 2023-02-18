@@ -31,14 +31,16 @@ export const Filters: React.FC<IFiltersProps> = props => {
             Цена
           </Text>
           <RangeSlider
+            px={16}
             value={props.priceValue}
-            onChangeEnd={props.setPriceValue}
+            onChange={props.setPriceValue}
             min={500000}
             max={30000000}
             marks={[
-              { value: 500000, label: '500000' },
-              { value: 30000000, label: '30000000' },
+              { value: 500000, label: '500 тыс' },
+              { value: 30000000, label: '30 млн' },
             ]}
+            size={'lg'}
           />
         </Grid.Col>
         <Grid.Col px={16} py={8} span={4}>
@@ -46,14 +48,16 @@ export const Filters: React.FC<IFiltersProps> = props => {
             Площадь (м²)
           </Text>
           <RangeSlider
+            px={16}
             value={props.squareValue}
-            onChangeEnd={props.setSquareValue}
+            onChange={props.setSquareValue}
             min={10}
             max={150}
             marks={[
               { value: 10, label: '10' },
               { value: 150, label: '150' },
             ]}
+            size={'lg'}
           />
         </Grid.Col>
         <Grid.Col px={16} py={8} span={4}>
@@ -61,17 +65,19 @@ export const Filters: React.FC<IFiltersProps> = props => {
             Этаж
           </Text>
           <RangeSlider
+            px={16}
             value={props.floorsValue}
-            onChangeEnd={props.setFloorsValue}
+            onChange={props.setFloorsValue}
             min={0}
             max={25}
             marks={[
               { value: 0, label: '0' },
               { value: 25, label: '25' },
             ]}
+            size={'lg'}
           />
         </Grid.Col>
-        <Grid.Col px={16} pt={24} span={4}>
+        <Grid.Col px={16} pt={30} span={4}>
           <Text pb={4} fz={20}>
             Район города
           </Text>
@@ -83,9 +89,10 @@ export const Filters: React.FC<IFiltersProps> = props => {
             data={['React', 'Angular', 'Svelte', 'Vue']}
             withinPortal
             placeholder="Выберите районы"
+            size={'lg'}
           />
         </Grid.Col>
-        <Grid.Col px={16} pt={24} span={4}>
+        <Grid.Col px={16} pt={30} span={4}>
           <Text pb={4} fz={20}>
             Класс жилья
           </Text>
@@ -97,9 +104,10 @@ export const Filters: React.FC<IFiltersProps> = props => {
             data={['React', 'Angular', 'Svelte', 'Vue']}
             withinPortal
             placeholder="Выберите классы"
+            size={'lg'}
           />
         </Grid.Col>
-        <Grid.Col px={16} mt={16} span={4}>
+        <Grid.Col px={16} mt={30} span={4}>
           <Button fullWidth onClick={props.toggleDrawer} leftIcon={<Map2 />} style={{ minHeight: '100%' }}>
             <Text fz={20}>Открыть карту</Text>
           </Button>
