@@ -51,7 +51,14 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
 
   useEffect(() => {
     filterStore.getRegions();
+    filterStore.getAparts();
   }, []);
+
+  useEffect(() => {
+    if (!!filterStore.apartments.length) {
+      console.log(filterStore.apartments);
+    }
+  }, [filterStore.apartments]);
 
   const handleChange = useCallback(
     debounce(() => {
