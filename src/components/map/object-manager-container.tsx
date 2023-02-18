@@ -17,16 +17,16 @@ const ObjectManagerContainer: FC<ObjectManagerContainerProps> =
       <>
         <ObjectManager
           options={{
-            // clusterize: true,
-            // gridSize: 100,
+            clusterize: true,
+            gridSize: 100,
           }}
           clusters={{
-            // preset: 'islands#greenClusterIcons',
+            preset: 'islands#nightClusterIcons',
           }}
 
           features={ features }
-          // filter={ objectManagerFilter }
-          //@ts-ignore
+          // // filter={ objectManagerFilter }
+          // //@ts-ignore
           // instanceRef={ref =>
           //   //@ts-ignore
           //   ref?.objects.events.add('click', (e) => {

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Drawer, useMantineTheme } from '@mantine/core';
+import { Drawer, useMantineTheme,Text } from '@mantine/core';
 import EstateMap from '../../../components/map/estate-map';
 
 interface IMapsDrawerProps {
   isOpen: boolean;
   toggleDrawer: () => void;
   mapPolygonColors: string[];
+  prices: number[]
 }
 
 export const MapsDrawer: React.FC<IMapsDrawerProps> = props => {
@@ -14,9 +15,15 @@ export const MapsDrawer: React.FC<IMapsDrawerProps> = props => {
   //Render
   return (
     <>
-      <Drawer opened={props.isOpen} onClose={props.toggleDrawer} title="Порайонная динамика цены" padding="xl" size={'60%'}>
+      <Drawer
+        opened={props.isOpen}
+        onClose={props.toggleDrawer}
+        title={<Text size={22} fw={500}>Порайонная динамика цены</Text>}
+        padding="xl"
+        size={'60%'}
+      >
         {/* Drawer content */}
-        <EstateMap mapPolygonColors={props.mapPolygonColors} />
+        <EstateMap prices={props.prices} mapPolygonColors={props.mapPolygonColors} />
       </Drawer>
     </>
   );

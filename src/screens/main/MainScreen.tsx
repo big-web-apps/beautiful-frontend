@@ -31,6 +31,7 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const [colors, setColors] = useState<string[]>([]);
+  const [prices, setPrices] = useState<number[]>([]);
 
   //Effects
   useEffect(() => {
@@ -57,6 +58,7 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
   useEffect(() => {
     if (!!filterStore.apartments.length) {
       console.log(filterStore.apartments);
+
     }
   }, [filterStore.apartments]);
 
@@ -75,17 +77,18 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
   };
 
   const countPolygonColors = () => {
-    let prices: number[] = [];
+    let tempPrices: number[] = [];
 
     Object.values(dataSell1).map((item, index) => {
       const t = item.data[0][1];
-      return prices.push(parseInt(t));
+      return tempPrices.push(parseInt(t));
     });
-    let maxPrice = Math.max(...prices);
+    setPrices(tempPrices)
+    let maxPrice = Math.max(...tempPrices);
 
     let tempColors: string[] = [];
 
-    prices.forEach(price => {
+    tempPrices.forEach(price => {
       let percentage = (price * 100) / maxPrice;
 
       let R, G, B;
@@ -169,7 +172,7 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
             </Center>
           )}
         </Box>
-        <MapsDrawer mapPolygonColors={colors} isOpen={openDrawer} toggleDrawer={handleToggleDrawer} />
+        <MapsDrawer prices={prices} mapPolygonColors={colors} isOpen={openDrawer} toggleDrawer={handleToggleDrawer} />
       </Box>
     </DefaultLayout>
   );
