@@ -8,6 +8,7 @@ import { useRootStore } from '../../base/RootStore';
 import { observer } from 'mobx-react-lite';
 import { MapsDrawer } from './components/MapsDrawer';
 import EstateCard from '../../components/estate-card/EstateCard';
+import {dataSell1} from '../stat/components/data';
 
 interface IMainScreenProps {}
 
@@ -19,10 +20,48 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  const [colors, setColors] = useState<string[]>([])
+
+
   //Handlers
   const handleToggleDrawer = () => {
     setOpenDrawer(prev => !prev);
+    countPolygonColors()
   };
+
+  const countPolygonColors = () => {
+    let prices: number[] = []
+
+    Object.values(dataSell1).map((item, index) => {
+      const t = item.data[0][1]
+      return (
+        prices.push(parseInt(t))
+      )
+    })
+    let maxPrice = Math.max(...prices)
+    console.log(maxPrice)
+
+    let tempColors: string[] = []
+
+    prices.forEach( (price) => {
+      let percentage = price * 100 / maxPrice
+
+      let R, G, B
+      if (percentage <= 50){
+        R = 255
+        G = (percentage / 50.0) * 255
+      }
+      else {
+        R = 255 - ((percentage - 50) / 50.0) * 255
+        G = 255
+      }
+      B = 0
+
+      tempColors.push('rgb(' + R + ',' + G + ',' + B + ')')
+    })
+    setColors([...tempColors])
+  }
+
 
   //Render
   return (
@@ -82,7 +121,7 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
             })}
           </Grid>
         </Box>
-        <MapsDrawer isOpen={openDrawer} toggleDrawer={handleToggleDrawer} />
+        <MapsDrawer mapPolygonColors={colors} isOpen={openDrawer} toggleDrawer={handleToggleDrawer} />
       </Box>
     </DefaultLayout>
   );

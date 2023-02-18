@@ -1,8 +1,9 @@
-import React, {FC} from 'react'
+import React, {FC, useState} from 'react'
 import {Placemark, Polygon, YMaps, Map} from '@pbe/react-yandex-maps'
 
 import districts from './map.json'
-import ObjectManagerContainer from './object-manager-container';
+import { dataSell1 } from './../../screens/stat/components/data'
+import ObjectManagerContainer from './object-manager-container'
 
 interface MapContainerProps {
   state: {
@@ -14,8 +15,11 @@ interface MapContainerProps {
   features?: any,
   objectManagerFilter?: any,
   onPlaceMarkClick?: any,
-  isLoading?: boolean
+  isLoading?: boolean,
+  mapPolygonColors: string[]
 }
+
+
 
 const MapContainer: FC<MapContainerProps> = ({
                                                state = {center: [45.035470, 38.975313], zoom: 14},
@@ -24,34 +28,38 @@ const MapContainer: FC<MapContainerProps> = ({
                                                features,
                                                objectManagerFilter,
                                                onPlaceMarkClick,
-                                               isLoading
-                                             }) => {
-  console.log(districts.data[0].geometry)
-  const defaultState = {
-    center: [45.035470, 38.975313],
-    zoom: 14,
-  };
+                                               isLoading,
+                                               mapPolygonColors
+}) => {
+
+
   return (
     <>
       <YMaps>
-        <Map defaultState={defaultState} width={width} height={height} >
+        <Map defaultState={state} width={width} height={height} >
           <ObjectManagerContainer
             features={ features }
             objectManagerFilter={ objectManagerFilter }
             onPlaceMarkClick={ onPlaceMarkClick }
           />
           {
-            districts.data.map(e => {
+            districts.data.map((item, index) => {
               return (
                 <Polygon
-                  key={e.name}
-                  geometry={e.geometry}
+                  key={item.name}
+                  geometry={item.geometry}
+                  properties={{
+                    hintContent: item.name
+                  }}
                   options={{
                     strokeColor: "#4b0fff",
-                    fillColor: "#cfc3ff",
-                    opacity: 0.3,
+                    fillColor: mapPolygonColors == null ? '#cfc3ff' : mapPolygonColors[index],
+                    opacity: 0.5,
                     strokeWidth: 2,
                   }}
+                  modules={
+                    ['geoObject.addon.balloon', 'geoObject.addon.hint']
+                  }
                 />
               )
             })

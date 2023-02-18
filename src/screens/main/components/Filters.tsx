@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Button, Card, Grid, MultiSelect, RangeSlider, Text, useMantineTheme } from '@mantine/core';
 import { Map2 } from 'tabler-icons-react';
+import {dataSell1} from '../../stat/components/data';
 
 interface IFiltersProps {
   priceValue: [number, number];
@@ -18,6 +19,7 @@ interface IFiltersProps {
 
 export const Filters: React.FC<IFiltersProps> = props => {
   const theme = useMantineTheme();
+
 
   //Render
   return (
@@ -107,9 +109,9 @@ export const Filters: React.FC<IFiltersProps> = props => {
             size={'lg'}
           />
         </Grid.Col>
-        <Grid.Col px={16} mt={30} span={4}>
+        <Grid.Col px={14} mt={55} span={4}>
           <Button fullWidth onClick={props.toggleDrawer} leftIcon={<Map2 />} style={{ minHeight: '100%' }}>
-            <Text fz={20}>Открыть карту</Text>
+            <Text fz={18}>Открыть карту</Text>
           </Button>
         </Grid.Col>
       </Grid>
