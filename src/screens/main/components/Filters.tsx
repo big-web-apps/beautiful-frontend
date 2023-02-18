@@ -7,11 +7,13 @@ import {
   Grid,
   Group,
   MultiSelect,
-  RangeSlider, Stack,
+  RangeSlider,
+  Stack,
   Text,
   useMantineTheme,
 } from '@mantine/core';
 import { LockOff, LockOpen, Map2, ShieldLock } from 'tabler-icons-react';
+import { useRootStore } from '../../../base/RootStore';
 
 interface IFiltersProps {
   priceValue: [number, number];
@@ -30,12 +32,13 @@ interface IFiltersProps {
 }
 
 export const Filters: React.FC<IFiltersProps> = props => {
+  const { filterStore } = useRootStore();
   const theme = useMantineTheme();
 
   //Render
   const renderAllFilters = () => {
     return (
-      <Accordion px={-8}>
+      <Accordion px={-8} defaultValue={'customization'}>
         <Accordion.Item value="customization" style={{ border: '1px solid transparent', padding: '-8px' }}>
           <Accordion.Control style={{ border: '1px solid transparent', margin: '-16px', width: 400 }}>
             <Text fw={500} fz={28}>
@@ -104,10 +107,10 @@ export const Filters: React.FC<IFiltersProps> = props => {
                   value={props.roomsValue}
                   onChange={props.setRoomsValue}
                   min={1}
-                  max={10}
+                  max={5}
                   marks={[
-                    { value: 1, label: '0' },
-                    { value: 10, label: '10' },
+                    { value: 1, label: '1' },
+                    { value: 5, label: '5' },
                   ]}
                   size={'lg'}
                 />
@@ -121,7 +124,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
                   value={props.districtValue}
                   onChange={props.setDistrictValue}
                   dropdownPosition="bottom"
-                  data={['React', 'Angular', 'Svelte', 'Vue']}
+                  data={filterStore.districts || []}
                   withinPortal
                   placeholder="Выберите районы"
                   size={'lg'}
@@ -136,7 +139,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
                   value={props.classesValue}
                   onChange={props.setClassesValue}
                   dropdownPosition="bottom"
-                  data={['React', 'Angular', 'Svelte', 'Vue']}
+                  data={filterStore.classes || []}
                   withinPortal
                   placeholder="Выберите классы"
                   size={'lg'}
@@ -165,18 +168,21 @@ export const Filters: React.FC<IFiltersProps> = props => {
           <Button radius={'md'} leftIcon={<ShieldLock />} color={'green'} fullWidth p={8} style={{ height: '100%' }}>
             <Box>
               <Text size={'lg'}>Минимум риска</Text>
-              <Text size={'sm'} sx={{lineHeight: 1.3}}>
-                Покупка жилья, которое уже сдано<br/> или близко к его сдаче.<br/> Только от крупных застройщиков.
+              <Text size={'sm'} sx={{ lineHeight: 1.3 }}>
+                Покупка жилья, которое уже сдано
+                <br /> или близко к его сдаче.
+                <br /> Только от крупных застройщиков.
               </Text>
             </Box>
           </Button>
         </Grid.Col>
         <Grid.Col span={4}>
           <Button radius={'md'}  leftIcon={<LockOpen />} color={'yellow'} fullWidth p={8} style={{ height: '100%' }}>
-            <Box sx={{width: '100%'}}>
+            <Box sx={{ width: '100%' }}>
               <Text size={'lg'}>Средний риск</Text>
-              <Text size={'sm'} sx={{lineHeight: 1.3 }}>
-                Надежные застройщики <br/>на этапе строительства
+              <Text size={'sm'} sx={{ lineHeight: 1.3 }}>
+                Надежные застройщики <br />
+                на этапе строительства
               </Text>
             </Box>
           </Button>
@@ -185,8 +191,9 @@ export const Filters: React.FC<IFiltersProps> = props => {
           <Button radius={'md'}  leftIcon={<LockOff />} color={'red'} fullWidth p={8} style={{ height: '100%' }}>
             <Box>
               <Text size={'lg'}>Максимальный риск</Text>
-              <Text size={'sm'}  sx={{lineHeight: 1.3 }}>
-                Покупка на котловане от застройщика,<br/> рекомендуем быть внимательными
+              <Text size={'sm'} sx={{ lineHeight: 1.3 }}>
+                Покупка на котловане от застройщика,
+                <br /> рекомендуем быть внимательными
               </Text>
             </Box>
           </Button>

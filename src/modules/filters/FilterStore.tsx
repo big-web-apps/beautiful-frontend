@@ -6,14 +6,17 @@ export class FilterStore {
   static LIMIT = 12;
   loading = false;
   loadingMore = false;
+  regionsLoading = false;
 
   priceRange: [number, number] = [500000, 30000000];
   squareRange: [number, number] = [10, 150];
   floorsRange: [number, number] = [0, 25];
-  roomsRange: [number, number] = [1, 10];
+  roomsRange: [number, number] = [1, 5];
 
   districts: string[] = [];
-  classes: string[] = [];
+  classes: string[] = ['Комфорт', 'Элит', 'Стандарт', 'Бизнес'];
+  chooseDistricts: string[] = [];
+  chooseClasses: string[] = [];
 
   currentItems: ObjectModel[] = [];
   currentItem: ObjectModel | null = null;
@@ -27,7 +30,7 @@ export class FilterStore {
   }
 
   get haveNewItems() {
-    return this.currentItemsCount > this.currentItemsOffset - FilterStore.LIMIT;
+    return !!this.currentItems.length && this.currentItemsCount > this.currentItemsOffset - FilterStore.LIMIT;
   }
 
   getFlats = () => {
@@ -44,8 +47,8 @@ export class FilterStore {
         this.floorsRange,
         this.roomsRange,
         this.priceRange,
-        this.districts,
-        this.classes,
+        this.chooseDistricts,
+        this.chooseClasses,
       )
       .then(({ count, results }) => {
         console.log(results);
@@ -73,6 +76,19 @@ export class FilterStore {
       })
       .finally(() => {
         this.setLoading(false);
+      });
+  };
+
+  getRegions = () => {
+    this.setRegionsLoading(true);
+
+    this.filterService
+      .getRegions()
+      .then(item => {
+        this.setDistricts(item);
+      })
+      .finally(() => {
+        this.setRegionsLoading(false);
       });
   };
 
@@ -108,6 +124,14 @@ export class FilterStore {
     this.districts = value;
   };
 
+  setChooseDistricts = (value: string[]) => {
+    this.chooseDistricts = value;
+  };
+
+  setChooseClasses = (value: string[]) => {
+    this.chooseClasses = value;
+  };
+
   setCurrentItems = (value: ObjectModel[]) => {
     this.currentItems = value;
   };
@@ -122,6 +146,10 @@ export class FilterStore {
 
   setCurrentItemsCount = (value: number) => {
     this.currentItemsCount = value;
+  };
+
+  setRegionsLoading = (value: boolean) => {
+    this.regionsLoading = value;
   };
 
   resetStore = () => {

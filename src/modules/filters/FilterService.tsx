@@ -4,6 +4,7 @@ import { ObjectModel } from '../../screens/object/ObjectData';
 export const filterEndpoints = {
   GET_FLATS: (offset: number) => `${API_URL}filteredflats?offset=${offset}`,
   GET_FLAT: (id: number) => `${API_URL}flats/${id}`,
+  GET_REGIONS: () => `${API_URL}getallregions`,
 };
 
 export class FilterService {
@@ -22,12 +23,12 @@ export class FilterService {
       rooms: this.arrayStringify(rooms),
       price: this.arrayStringify(price),
     };
-    if (districts) {
-      filterData = Object.assign(filterData, this.arrayStringify(districts));
+    if (!!districts.length) {
+      filterData = Object.assign(filterData, { districts: this.arrayStringify(districts) });
     }
 
-    if (class_type) {
-      filterData = Object.assign(filterData, this.arrayStringify(class_type));
+    if (!!class_type.length) {
+      filterData = Object.assign(filterData, { class_type: this.arrayStringify(class_type) });
     }
 
     const { data } = await $api.get(filterEndpoints.GET_FLATS(offset), { params: filterData });
@@ -37,6 +38,12 @@ export class FilterService {
 
   async getFlat(id: number): Promise<ObjectModel> {
     const { data } = await $api.get(filterEndpoints.GET_FLAT(id));
+
+    return data;
+  }
+
+  async getRegions(): Promise<string[]> {
+    const { data } = await $api.get(filterEndpoints.GET_REGIONS());
 
     return data;
   }

@@ -42,7 +42,7 @@ const EstateCard: FC<IEstateCard> = props => {
         </Group>
         <Image
           src={data.image || img}
-          width={130}
+          width={120}
           sx={{
             position: 'absolute',
             bottom: 8,

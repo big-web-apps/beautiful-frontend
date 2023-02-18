@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import title from './image/title.png';
 import {
@@ -20,6 +20,7 @@ import { observer } from 'mobx-react-lite';
 import { MapsDrawer } from './components/MapsDrawer';
 import EstateCard from '../../components/estate-card/EstateCard';
 import { dataSell1 } from '../stat/components/data';
+import { debounce } from 'chart.js/helpers';
 
 interface IMainScreenProps {}
 
@@ -33,8 +34,8 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
 
   //Effects
   useEffect(() => {
-    filterStore.setCurrentItemsOffset(0);
-    filterStore.getFlats();
+    filterStore.setLoading(true);
+    handleChange();
 
     /*return () => {
       filterStore.resetStore();
@@ -42,17 +43,23 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
   }, [
     filterStore.priceRange,
     filterStore.roomsRange,
+    filterStore.floorsRange,
     filterStore.squareRange,
-    filterStore.districts,
-    filterStore.classes,
+    filterStore.chooseDistricts,
+    filterStore.chooseClasses,
   ]);
 
-  /*const handleChangeCountServer = useCallback(
-      debounce((itemId: number) => {
-        cartStore.changeServerCart(itemId);
-      }, 750),
-      [],
-  );*/
+  useEffect(() => {
+    filterStore.getRegions();
+  }, []);
+
+  const handleChange = useCallback(
+    debounce(() => {
+      filterStore.setCurrentItemsOffset(0);
+      filterStore.getFlats();
+    }, 750),
+    [],
+  );
 
   //Handlers
   const handleToggleDrawer = () => {
@@ -119,10 +126,10 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
             setSquareValue={filterStore.setSquareRange}
             floorsValue={filterStore.floorsRange}
             setFloorsValue={filterStore.setFloorsRange}
-            classesValue={filterStore.classes}
-            setClassesValue={filterStore.setClasses}
-            districtValue={filterStore.districts}
-            setDistrictValue={filterStore.setDistricts}
+            classesValue={filterStore.chooseClasses}
+            setClassesValue={filterStore.setChooseClasses}
+            districtValue={filterStore.chooseDistricts}
+            setDistrictValue={filterStore.setChooseDistricts}
             roomsValue={filterStore.roomsRange}
             setRoomsValue={filterStore.setRoomsRange}
             toggleDrawer={handleToggleDrawer}
@@ -130,9 +137,9 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
         </Box>
         <Box mt={40} pos={'relative'}>
           <Center>
-            <LoadingOverlay visible={filterStore.loading} />
+            <LoadingOverlay pos={'absolute'} visible={filterStore.loading} />
           </Center>
-          <Grid>
+          <Grid style={{ minHeight: 50 }}>
             {!!filterStore?.currentItems?.length &&
               filterStore.currentItems?.map(data => {
                 return (
@@ -142,7 +149,7 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
                 );
               })}
           </Grid>
-          {!filterStore.loadingMore && filterStore.haveNewItems && (
+          {!filterStore.loading && !filterStore.loadingMore && filterStore.haveNewItems && (
             <Center pt={24}>
               <Button size={'lg'} onClick={handleLoadMore}>
                 Получить новые элементы
