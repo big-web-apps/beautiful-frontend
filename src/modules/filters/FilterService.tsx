@@ -53,7 +53,7 @@ export class FilterService {
   async getAparts(): Promise<ApartModel[]> {
     const { data } = await $api.get(filterEndpoints.GET_APARTS());
 
-    return data;
+    return data.results;
   }
 
   arrayStringify = (value: any) => {
