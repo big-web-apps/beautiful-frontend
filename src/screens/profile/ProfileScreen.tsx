@@ -4,42 +4,41 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../base/firebase/firebase-config';
 import { useRootStore } from '../../base/RootStore';
 import { Routes } from '../../routes/routes';
-import {Avatar, Button, Container, Group, Paper, Stack, Text, Title} from '@mantine/core';
+import { Avatar, Container, Group, Paper, Stack, Text, Title } from '@mantine/core';
 import DefaultLayout from '../../components/layouts/defaultLayout/DefaultLayout';
 import { observer } from 'mobx-react-lite';
-import EstateCard from '../../components/estate-card/EstateCard';
 
 const data = [
   {
-    title: "ЖК Смородина",
-    address: "Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7",
+    title: 'ЖК Смородина',
+    address: 'Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7',
     square: 37.65,
     rooms: 1,
-    floor: "6-10",
-    category: "Элит",
-    price: "4 860 615 ₽",
-    isLiked: true
+    floor: '6-10',
+    category: 'Элит',
+    price: '4 860 615 ₽',
+    isLiked: true,
   },
   {
-    title: "ЖК Смородина",
-    address: "Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7",
+    title: 'ЖК Смородина',
+    address: 'Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7',
     square: 37.65,
     rooms: 1,
-    floor: "6-10",
-    category: "Элит",
-    price: "4 860 615 ₽",
+    floor: '6-10',
+    category: 'Элит',
+    price: '4 860 615 ₽',
   },
   {
-    title: "ЖК Смородина",
-    address: "Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7",
+    title: 'ЖК Смородина',
+    address: 'Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7',
     square: 37.65,
     rooms: 1,
-    floor: "6-10",
-    category: "Элит",
-    price: "4 860 615 ₽",
-    isLiked: true
-  }
-]
+    floor: '6-10',
+    category: 'Элит',
+    price: '4 860 615 ₽',
+    isLiked: true,
+  },
+];
 
 export const ProfileScreen = observer(() => {
   const { exampleStore, userStore } = useRootStore();
@@ -65,49 +64,43 @@ export const ProfileScreen = observer(() => {
   //Renders
   return (
     <DefaultLayout>
-      <Container size={'xl'} mt={20} >
+      <Container size={'xl'} mt={20}>
         <Paper>
-          <Group spacing={20}>
-            <Avatar color={'indigo'} radius={100} size={80} />
-            <Stack spacing={0}>
-              <Text size={22} fw={500} >Инвестор Инвесторович</Text>
-              <Text c={'dimmed'} size={16}>+7 (918) 900 00 00</Text>
+          <Group spacing={20} position={'apart'}>
+            <Group>
+              <Avatar color={'indigo'} radius={100} size={80} />
+              <Stack spacing={0}>
+                <Text size={22} fw={500}>
+                  Инвестор Инвесторович
+                </Text>
+                <Text c={'dimmed'} size={16}>
+                  +7 (918) 900 00 00
+                </Text>
+              </Stack>
+            </Group>
+            <Stack>
+              <Text fw={600} size={'lg'}>
+                Тариф: Инвестор
+              </Text>
+              <Text size={'lg'}>Осталось 2 запроса на месяц</Text>
             </Stack>
           </Group>
         </Paper>
-        <Text size={26} fw={500} my={35}>Портфель</Text>
+        <Text size={26} fw={600} my={35}>
+          Расширенная аналитика
+        </Text>
         <Group grow>
-          {
-            data.map((data) => {
-              return <EstateCard
-                title={data.title}
-                address={data.address}
-                square={data.square}
-                rooms={data.rooms}
-                floor={data.floor}
-                category={data.category}
-                price={data.price}
-                isLiked={false}
-              />
-            })
-          }
+          {/*{data.map(data => {
+            return <EstateCard data={data} />;
+          })}*/}
         </Group>
-        <Text size={26} fw={500} my={35}>Избранное</Text>
+        <Text size={26} fw={600} my={35}>
+          Избранное
+        </Text>
         <Group grow>
-          {
-            data.map((data) => {
-              return <EstateCard
-                title={data.title}
-                address={data.address}
-                square={data.square}
-                rooms={data.rooms}
-                floor={data.floor}
-                category={data.category}
-                price={data.price}
-                isLiked={true}
-              />
-            })
-          }
+          {/*{data.map(data => {
+            return <EstateCard data={data} />;
+          })}*/}
         </Group>
         {/*<Button onClick={handleLogout}>Logout</Button>*/}
       </Container>

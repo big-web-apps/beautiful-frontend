@@ -1,7 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import title from './image/title.png';
-import { BackgroundImage, Box, Center, Grid, Loader, Stack, Text, useMantineTheme } from '@mantine/core';
+import {
+  BackgroundImage,
+  Box,
+  Button,
+  Center,
+  Grid,
+  Loader,
+  LoadingOverlay,
+  Stack,
+  Text,
+  useMantineTheme,
+} from '@mantine/core';
 import DefaultLayout from '../../components/layouts/defaultLayout/DefaultLayout';
 import { Filters } from './components/Filters';
 import { useRootStore } from '../../base/RootStore';
@@ -19,9 +30,23 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  //Effects
+  useEffect(() => {
+    filterStore.resetStore();
+    filterStore.getFlats();
+
+    return () => {
+      filterStore.resetStore();
+    };
+  }, [filterStore.priceRange, filterStore.roomsRange, filterStore.squareRange]);
+
   //Handlers
   const handleToggleDrawer = () => {
     setOpenDrawer(prev => !prev);
+  };
+
+  const handleLoadMore = () => {
+    filterStore.getFlats();
   };
 
   //Render
@@ -54,33 +79,37 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
             setClassesValue={filterStore.setClasses}
             districtValue={filterStore.districts}
             setDistrictValue={filterStore.setDistricts}
+            roomsValue={filterStore.roomsRange}
+            setRoomsValue={filterStore.setRoomsRange}
             toggleDrawer={handleToggleDrawer}
           />
         </Box>
-        <Box mt={60} pos={'relative'}>
-          {filterStore.loading && (
-            <Center>
-              <Loader pos={'absolute'} />
+        <Box mt={40} pos={'relative'}>
+          <Center>
+            <LoadingOverlay visible={filterStore.loading} />
+          </Center>
+          <Grid>
+            {!!filterStore?.currentItems?.length &&
+              filterStore.currentItems?.map(data => {
+                return (
+                  <Grid.Col key={data.id} span={4}>
+                    <EstateCard data={data} />
+                  </Grid.Col>
+                );
+              })}
+          </Grid>
+          {!filterStore.loadingMore && filterStore.haveNewItems && (
+            <Center pt={24}>
+              <Button size={'lg'} onClick={handleLoadMore}>
+                Получить новые элементы
+              </Button>
             </Center>
           )}
-          <Grid>
-            {filterStore.currentItems?.map(data => {
-              return (
-                <Grid.Col span={4}>
-                  <EstateCard
-                    title={data.title}
-                    address={data.address}
-                    square={data.square}
-                    rooms={data.rooms}
-                    floor={data.floor}
-                    category={data.category}
-                    price={data.price}
-                    isLiked={false}
-                  />
-                </Grid.Col>
-              );
-            })}
-          </Grid>
+          {filterStore.loadingMore && (
+            <Center pt={24}>
+              <Loader />
+            </Center>
+          )}
         </Box>
         <MapsDrawer isOpen={openDrawer} toggleDrawer={handleToggleDrawer} />
       </Box>
