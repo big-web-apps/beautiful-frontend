@@ -74,7 +74,7 @@ export const ObjectScreen: React.FC = observer(() => {
         <Grid gutter={40}>
           <Grid.Col span={3}>
             <img
-              src={currentItem?.image || pig}
+              src={currentItem?.image || ''}
               width={'100%'}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null;
