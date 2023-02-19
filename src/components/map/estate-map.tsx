@@ -60,13 +60,15 @@ const EstateMap: React.FC<EstateMapI> = observer(props => {
   }, []);
 
   return (
-    <div style={{ position: 'relative', height: '95%' }}>
-      <MapContainer
-        mapPolygonColors={props.mapPolygonColors}
-        state={{ center: [45.03547, 38.975313], zoom: 12 }}
-        features={features}
-        prices={props.prices}
-      />
+    <div style={{ position: 'absolute' }}>
+      <div style={{ position: 'relative', minHeight: '95%', minWidth: '100%' }}>
+        <MapContainer
+          mapPolygonColors={props.mapPolygonColors}
+          state={{ center: [45.03547, 38.975313], zoom: 12 }}
+          features={features}
+          prices={props.prices}
+        />
+      </div>
     </div>
   );
 });

@@ -26,7 +26,7 @@ export const MapsDrawer: React.FC<IMapsDrawerProps> = props => {
         padding="xl"
         position={'left'}
         withinPortal
-        size={'60%'}
+        size={'70%'}
         style={{ zIndex: 10000 }}
       >
         {/* Drawer content */}
