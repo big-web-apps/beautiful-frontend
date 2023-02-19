@@ -156,12 +156,12 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
                 ул. Уральская, 100/6
               </Text>
             </Stack>
-            <Text fw={600} size={32}>
+            <Text fw={600} size={32} td={'underline'}>
               От {TextHelper.getPriceString(1148230)}
             </Text>
           </Group>
           <Text mt={20} fw={600} size={28} inline sx={{ zIndex: 2, position: 'relative' }}>
-            Уникальное предложение вблизи от всей инфраструктуры! Сдача Литера 3 в этом году
+            Уникальное предложение вблизи от всей инфраструктуры!<br/> Сдача Литера 3 в этом году
           </Text>
           <Text mt={16} size={12} inline sx={{ zIndex: 2, position: 'relative' }}>
             Реклама. АСК недвижимость. Подробная информация на сайте застройщика

@@ -191,15 +191,15 @@ export const Filters: React.FC<IFiltersProps> = props => {
           <Button
             disabled
             radius={'md'}
-            leftIcon={<LockOpen />}
+            leftIcon={<LockOpen style={{color: 'gray'}} />}
             color={'yellow'}
             fullWidth
             p={8}
             style={{ height: '100%', width: '100%' }}
           >
             <Flex align={'flex-start'} direction={'column'} style={{ width: '100%' }}>
-              <Text size={'lg'}>Средний риск</Text>
-              <Text size={'sm'} sx={{ lineHeight: 1.3 }}>
+              <Text size={'lg'} sx={{color: theme.colors.gray[5]}}>Средний риск</Text>
+              <Text size={'sm'} sx={{ lineHeight: 1.3, color: theme.colors.gray[5] }}>
                 Надежные застройщики <br />
                 на этапе строительства
               </Text>
@@ -210,15 +210,15 @@ export const Filters: React.FC<IFiltersProps> = props => {
           <Button
             disabled
             radius={'md'}
-            leftIcon={<LockOff />}
+            leftIcon={<LockOff style={{color: 'gray'}} />}
             color={'red'}
             fullWidth
             p={8}
             style={{ height: '100%' }}
           >
             <Flex align={'flex-start'} direction={'column'} style={{ width: '100%' }}>
-              <Text size={'lg'}>Максимальный риск</Text>
-              <Text size={'sm'} sx={{ lineHeight: 1.3 }}>
+              <Text size={'lg'}  sx={{color: theme.colors.gray[5]}}>Максимальный риск</Text>
+              <Text size={'sm'} sx={{ lineHeight: 1.3, color: theme.colors.gray[5] }}>
                 Покупка на котловане от застройщика,
                 <br /> рекомендуем быть внимательными
               </Text>

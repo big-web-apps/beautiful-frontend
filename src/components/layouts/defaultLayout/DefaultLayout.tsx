@@ -33,9 +33,9 @@ const DefaultLayout = (props: { children: JSX.Element }) => {
     return (
       <MantineHeader height={55} fixed={true}>
         <Container size={'xl'} className={classes.inner}>
-          <Group align={'stretch'}>
+          <Group>
             <ActionIcon size={'xl'} variant={'transparent'}>
-              <PigMoney size={48} strokeWidth={1.5} color={'black'} />
+              <PigMoney size={48} strokeWidth={1.3} color={'#DEE2E6'} />
             </ActionIcon>
             {renderDesktopNavList()}
           </Group>
