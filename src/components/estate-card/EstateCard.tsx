@@ -37,7 +37,7 @@ const EstateCard: FC<IEstateCard> = props => {
         <Text mt={30} size={22} fw={500}>
           {TextHelper.getPriceString(data.price)}
         </Text>
-        <Group mt={4} mb={20} align={'center'}>
+        <Group mt={2} mb={20} align={'center'}>
           <Text size={24} fw={600} c={data.coefficient && data.coefficient > 1 ? 'green' : 'red'}>
             {data?.coefficient && data.coefficient.toFixed(2)}
           </Text>

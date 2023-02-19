@@ -1,11 +1,13 @@
 import { ActionIcon, Button, Container, createStyles, Group, Header as MantineHeader } from '@mantine/core';
-import {BrandReact, PigMoney, Plus} from 'tabler-icons-react';
+import { BrandReact, PigMoney, Plus, TextWrapDisabled } from 'tabler-icons-react';
 import { ColorSchemeButton } from '../../ColorSchemeButton';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { NavLinks, Routes } from '../../../routes/routes';
 import { useAllMQ } from '../../../base/hooks/useAllMQ';
 import { MobileNavItem } from './components/MobileNavItem';
 import { DesktopNavItem } from './components/DesktopNavItem';
+import { useState } from 'react';
+import { CompareDrawer } from './components/CompareDrawer';
 
 const DefaultLayout = (props: { children: JSX.Element }) => {
   const { classes } = useStyles();
@@ -15,9 +17,15 @@ const DefaultLayout = (props: { children: JSX.Element }) => {
 
   const { isMD } = useAllMQ();
 
+  const [isOpen, setOpen] = useState(false);
+
   //Handlers
   const handleUserButton = () => {
     navigate(Routes.profile);
+  };
+
+  const handleCompareButton = () => {
+    setOpen(prev => !prev);
   };
 
   //Renders
@@ -27,7 +35,7 @@ const DefaultLayout = (props: { children: JSX.Element }) => {
         <Container size={'xl'} className={classes.inner}>
           <Group align={'stretch'}>
             <ActionIcon size={'xl'} variant={'transparent'}>
-              <PigMoney size={48} strokeWidth={1.5} color={'black'}/>
+              <PigMoney size={48} strokeWidth={1.5} color={'black'} />
             </ActionIcon>
             {renderDesktopNavList()}
           </Group>
@@ -37,6 +45,9 @@ const DefaultLayout = (props: { children: JSX.Element }) => {
                 Профиль
               </Button>
             )}
+            <ActionIcon onClick={handleCompareButton}>
+              <TextWrapDisabled />
+            </ActionIcon>
             <ColorSchemeButton />
           </Group>
         </Container>
@@ -80,6 +91,7 @@ const DefaultLayout = (props: { children: JSX.Element }) => {
       <Container size={'xl'} py={70}>
         {props.children}
       </Container>
+      <CompareDrawer isOpen={isOpen} toggleDrawer={handleCompareButton} />
     </>
   );
 };

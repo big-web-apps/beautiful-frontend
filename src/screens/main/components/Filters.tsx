@@ -4,14 +4,17 @@ import {
   Box,
   Button,
   Card,
+  Container,
+  Flex,
   Grid,
   Group,
   MultiSelect,
   RangeSlider,
+  Stack,
   Text,
   useMantineTheme,
 } from '@mantine/core';
-import { LockOff, LockOpen, Map2, ShieldLock } from 'tabler-icons-react';
+import { Check, LockOff, LockOpen, Map2, ShieldLock } from 'tabler-icons-react';
 import { useRootStore } from '../../../base/RootStore';
 
 interface IFiltersProps {
@@ -98,7 +101,7 @@ export const Filters: React.FC<IFiltersProps> = props => {
                 />
               </Grid.Col>
               <Grid.Col px={16} py={8} span={4}>
-                <Text pb={8} fz={20}>
+                <Text pt={24} pb={8} fz={20}>
                   Количество комнат
                 </Text>
                 <RangeSlider
@@ -166,37 +169,60 @@ export const Filters: React.FC<IFiltersProps> = props => {
 
       <Grid pb={32}>
         <Grid.Col span={4}>
-          <Button radius={'md'} leftIcon={<ShieldLock />} color={'green'} fullWidth p={8} style={{ height: '100%' }}>
-            <Box>
+          <Button
+            radius={'md'}
+            leftIcon={<Check />}
+            color={'green'}
+            fullWidth
+            p={8}
+            style={{ width: '100%', height: '100%' }}
+          >
+            <Flex align={'flex-start'} direction={'column'} style={{ width: '100%' }}>
               <Text size={'lg'}>Минимум риска</Text>
               <Text size={'sm'} sx={{ lineHeight: 1.3 }}>
                 Покупка жилья, которое уже сдано
                 <br /> или близко к его сдаче.
                 <br /> Только от крупных застройщиков.
               </Text>
-            </Box>
+            </Flex>
           </Button>
         </Grid.Col>
         <Grid.Col span={4}>
-          <Button radius={'md'} leftIcon={<LockOpen />} color={'yellow'} fullWidth p={8} style={{ height: '100%' }}>
-            <Box sx={{ width: '100%' }}>
+          <Button
+            disabled
+            radius={'md'}
+            leftIcon={<LockOpen />}
+            color={'yellow'}
+            fullWidth
+            p={8}
+            style={{ height: '100%', width: '100%' }}
+          >
+            <Flex align={'flex-start'} direction={'column'} style={{ width: '100%' }}>
               <Text size={'lg'}>Средний риск</Text>
               <Text size={'sm'} sx={{ lineHeight: 1.3 }}>
                 Надежные застройщики <br />
                 на этапе строительства
               </Text>
-            </Box>
+            </Flex>
           </Button>
         </Grid.Col>
         <Grid.Col span={4}>
-          <Button radius={'md'} leftIcon={<LockOff />} color={'red'} fullWidth p={8} style={{ height: '100%' }}>
-            <Box>
+          <Button
+            disabled
+            radius={'md'}
+            leftIcon={<LockOff />}
+            color={'red'}
+            fullWidth
+            p={8}
+            style={{ height: '100%' }}
+          >
+            <Flex align={'flex-start'} direction={'column'} style={{ width: '100%' }}>
               <Text size={'lg'}>Максимальный риск</Text>
               <Text size={'sm'} sx={{ lineHeight: 1.3 }}>
                 Покупка на котловане от застройщика,
                 <br /> рекомендуем быть внимательными
               </Text>
-            </Box>
+            </Flex>
           </Button>
         </Grid.Col>
       </Grid>

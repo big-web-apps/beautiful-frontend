@@ -121,9 +121,11 @@ export const ObjectScreen: React.FC = observer(() => {
 
         <Grid pt={8} gutter={40}>
           <Grid.Col span={3}>
-            <Button variant={'outline'} fullWidth size={'lg'}>
-              Перейти на сайт
-            </Button>
+            <a href={currentItem?.url ? currentItem.url : ''}>
+              <Button variant={'outline'} fullWidth size={'lg'}>
+                Перейти на сайт
+              </Button>
+            </a>
             <Button mt={16} variant={'outline'} fullWidth size={'lg'}>
               Другие планировки
             </Button>
@@ -156,7 +158,7 @@ export const ObjectScreen: React.FC = observer(() => {
             <Text pb={16} fw={600} fz={28}>
               Что мы думаем?
             </Text>
-            <Grid gutter={40}>
+            <Grid gutter={10}>
               <Grid.Col span={6}>
                 <List
                   spacing="md"
@@ -226,8 +228,8 @@ export const ObjectScreen: React.FC = observer(() => {
                       </List.Item>
                     </List>
                     <Text pt={10} fz={14}>
-                      {TextHelper.getPriceString(currentItem?.price)} +{' '}
-                      {TextHelper.getPriceString(currentItem?.price / 10)} /{' '}
+                      ({TextHelper.getPriceString(currentItem?.price)} +{' '}
+                      {TextHelper.getPriceString(currentItem?.price / 10)} )/{' '}
                       {TextHelper.getPriceString(
                         rent[(currentItem?.districts as any) || ('' as any)][currentItem.rooms - 1],
                       )}{' '}
