@@ -127,20 +127,7 @@ export const ObjectScreen: React.FC = observer(() => {
                     {TextHelper.getPriceString(currentItem?.price)}
                   </Text>
                   <Group mb={20} align={'center'}>
-                    <Text
-                      pt={2}
-                      size={24}
-                      fw={600}
-                      c={
-                        currentItem?.coefficient && currentItem.coefficient > 1
-                          ? currentItem.coefficient > 1.09
-                            ? 'green'
-                            : 'yellow'
-                          : 'red'
-                      }
-                    >
-                      {currentItem?.coefficient && currentItem.coefficient.toFixed(2)}
-                    </Text>
+                    {TextHelper.getProcent(currentItem?.coefficient)}
                     {currentItem?.coefficient && currentItem.coefficient > 1 ? (
                       currentItem.coefficient > 1.09 ? (
                         <ArrowUpRight size={24} />
@@ -164,10 +151,10 @@ export const ObjectScreen: React.FC = observer(() => {
                   </Text>
                   <Slider
                     min={1}
-                    max={5}
+                    max={3}
                     marks={[
                       { value: 1, label: '1' },
-                      { value: 5, label: '5' },
+                      { value: 3, label: '3' },
                     ]}
                     value={years}
                     onChange={setYears}

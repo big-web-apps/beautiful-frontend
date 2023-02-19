@@ -38,14 +38,7 @@ const EstateCard: FC<IEstateCard> = props => {
           {TextHelper.getPriceString(data.price)}
         </Text>
         <Group mt={2} mb={20} align={'center'}>
-          <Text
-            pt={4}
-            size={24}
-            fw={600}
-            c={data.coefficient && data.coefficient > 1.0 ? (data.coefficient > 1.09 ? 'green' : 'yellow') : 'red'}
-          >
-            {data?.coefficient && data.coefficient.toFixed(2)}
-          </Text>
+          {TextHelper.getProcent(data?.coefficient)}
           {data.coefficient && data.coefficient > 1 ? (
             data.coefficient > 1.09 ? (
               <ArrowUpRight size={24} />
@@ -71,7 +64,6 @@ const EstateCard: FC<IEstateCard> = props => {
             objectFit: 'contain',
           }}
           onError={({ currentTarget }) => {
-            console.log('here');
             currentTarget.onerror = null;
             //@ts-ignore
             currentTarget.src =

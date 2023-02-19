@@ -1,3 +1,6 @@
+import { Text } from '@mantine/core';
+import React from 'react';
+
 export class TextHelper {
   static getPriceString = (price: number | null | undefined, fixed: number = 0, currency: string = '₽'): string => {
     if (!price) {
@@ -16,5 +19,18 @@ export class TextHelper {
     });
 
     return formatter.format(value);
+  };
+
+  static getProcent = (value: number | null | undefined) => {
+    if (!value) {
+      return 0;
+    }
+
+    const procent = value * 100 - 100;
+    return (
+      <Text pt={2} size={24} fw={600} c={value > 1 ? (value > 1.09 ? 'green' : 'yellow') : 'red'}>
+        {value && procent.toFixed(2)}%
+      </Text>
+    );
   };
 }
