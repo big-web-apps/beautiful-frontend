@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ActionIcon, Badge, Button, Card, Group, Image, Text } from '@mantine/core';
-import { ArrowDownRight, ArrowUpRight, Heart } from 'tabler-icons-react';
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Heart } from 'tabler-icons-react';
 
 import img from './../../assets/images/image.png';
 import { Link } from 'react-router-dom';
@@ -38,24 +38,44 @@ const EstateCard: FC<IEstateCard> = props => {
           {TextHelper.getPriceString(data.price)}
         </Text>
         <Group mt={2} mb={20} align={'center'}>
-          <Text size={24} fw={600} c={data.coefficient && data.coefficient > 1 ? 'green' : 'red'}>
+          <Text
+            pt={4}
+            size={24}
+            fw={600}
+            c={data.coefficient && data.coefficient > 1.0 ? (data.coefficient > 1.09 ? 'green' : 'yellow') : 'red'}
+          >
             {data?.coefficient && data.coefficient.toFixed(2)}
           </Text>
-          {data.coefficient && data.coefficient > 1 ? <ArrowUpRight size={24} /> : <ArrowDownRight size={24} />}
+          {data.coefficient && data.coefficient > 1 ? (
+            data.coefficient > 1.09 ? (
+              <ArrowUpRight size={24} />
+            ) : (
+              <ArrowRight size={24} />
+            )
+          ) : (
+            <ArrowDownRight size={24} />
+          )}
         </Group>
         <Group position={'left'}>
           <Button>Перейти к объекту </Button>
         </Group>
-        <Image
-          src={data.image || img}
+        <img
+          src={data.image || ''}
           width={120}
-          sx={{
+          style={{
             position: 'absolute',
             bottom: 8,
             right: 8,
             zIndex: 0,
             opacity: 0.8,
             objectFit: 'contain',
+          }}
+          onError={({ currentTarget }) => {
+            console.log('here');
+            currentTarget.onerror = null;
+            //@ts-ignore
+            currentTarget.src =
+              'https://avatars.mds.yandex.net/i?id=53fda90c878108f8d13a0315f5e22214-5459035-images-thumbs&n=13&exp=1';
           }}
         />
       </Card>

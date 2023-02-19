@@ -5,8 +5,10 @@ import {
   BackgroundImage,
   Box,
   Button,
+  Card,
   Center,
   Grid,
+  Group,
   Loader,
   LoadingOverlay,
   Stack,
@@ -21,6 +23,7 @@ import { MapsDrawer } from './components/MapsDrawer';
 import EstateCard from '../../components/estate-card/EstateCard';
 import { dataSell1 } from '../stat/components/data';
 import { debounce } from 'chart.js/helpers';
+import { TextHelper } from '../../helpers/TextHelper';
 
 interface IMainScreenProps {}
 
@@ -52,15 +55,8 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
 
   useEffect(() => {
     filterStore.getRegions();
-    filterStore.getAparts();
     filterStore.getPopular();
   }, []);
-
-  useEffect(() => {
-    if (!!filterStore.apartments.length) {
-      console.log(filterStore.apartments);
-    }
-  }, [filterStore.apartments]);
 
   const handleChange = useCallback(
     debounce(() => {
@@ -145,7 +141,33 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
             toggleDrawer={handleToggleDrawer}
           />
         </Box>
-        <Box mt={40} pos={'relative'}>
+        <Card
+          mt={16}
+          shadow="sm"
+          p="lg"
+          radius="md"
+          withBorder
+          sx={{ position: 'relative', backgroundColor: theme.colors.blue[9], zIndex: 1 }}
+        >
+          <Group position={'apart'} align={'start'}>
+            <Stack spacing={0}>
+              <Text size={15}>ЖК «Режиссер»</Text>
+              <Text mt={5} size={15} inline sx={{ zIndex: 2, position: 'relative' }}>
+                ул. Уральская, 100/6
+              </Text>
+            </Stack>
+            <Text fw={600} size={32}>
+              От {TextHelper.getPriceString(1148230)}
+            </Text>
+          </Group>
+          <Text mt={20} fw={600} size={28} inline sx={{ zIndex: 2, position: 'relative' }}>
+            Уникальное предложение вблизи от всей инфраструктуры! Сдача Литера 3 в этом году
+          </Text>
+          <Text mt={16} size={12} inline sx={{ zIndex: 2, position: 'relative' }}>
+            Реклама. АСК недвижимость. Подробная информация на сайте застройщика
+          </Text>
+        </Card>
+        <Box mt={20} pos={'relative'}>
           <Center>
             <LoadingOverlay pos={'absolute'} visible={filterStore.loading} />
           </Center>
@@ -172,10 +194,10 @@ export const MainScreen: React.FC<IMainScreenProps> = observer(() => {
             </Center>
           )}
         </Box>
-        <Text fw={500} fz={32} pt={60} pb={30}>
+        <Text fw={500} fz={32} pt={30} pb={20}>
           Популярное
         </Text>
-        <Box mt={40} pos={'relative'}>
+        <Box pos={'relative'}>
           <Center>
             <LoadingOverlay pos={'absolute'} visible={filterStore.loading} />
           </Center>

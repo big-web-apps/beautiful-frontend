@@ -40,6 +40,7 @@ export interface ObjectModel {
   image: string | null;
   url: string | null;
   square: number | null;
+  sale_price: number | null;
   living_square: number | null;
   coefficient: number | null;
 }
@@ -53,28 +54,3 @@ export interface apartment_complex {
   latitude: number;
   longitude: number;
 }
-
-export const data: ObjectModel = {
-  id: 1,
-  apartment_complex: {
-    id: 2,
-    name: 'ЖК Малинки',
-    address: 'Краснодарский край, Краснодар, Карасунский, мкр. Новознаменский, улица Богатырская, 11лит7',
-    class_type: 'elit',
-    image: 'sas',
-    latitude: 45,
-    longitude: 35,
-  },
-
-  square: 37.65,
-  rooms: 6,
-  floor: 7,
-  liter_name: 'фычсв',
-  districts: 'ГМР',
-  meter_price: 134455,
-  price: 56754346,
-  url: 'sas',
-  image: 'sas',
-  living_square: 20,
-  coefficient: 1.1,
-};

@@ -1,89 +1,74 @@
-import React, {useEffect, useState} from 'react';
-import {Map} from '@pbe/react-yandex-maps';
+import React, { useEffect, useState } from 'react';
+import { Map } from '@pbe/react-yandex-maps';
 import MapContainer from './map-container';
-import {Box} from '@mantine/core';
-import {useRootStore} from '../../base/RootStore';
+import { Box } from '@mantine/core';
+import { useRootStore } from '../../base/RootStore';
 
-import marker from './../../assets/images/Marker.svg'
+import marker from './../../assets/images/Marker.svg';
+import { observer } from 'mobx-react-lite';
 
 interface EstateMapI {
-  mapPolygonColors: string [];
-  prices: number[]
+  mapPolygonColors: string[];
+  prices: number[];
 }
 
-
-const EstateMap: React.FC<EstateMapI> = (props) => {
-  const {filterStore} = useRootStore();
+const EstateMap: React.FC<EstateMapI> = observer(props => {
+  const { filterStore } = useRootStore();
   const [features, setFeatures] = useState<any>({
-    type: "FeatureCollection",
-    features: []
-  })
+    type: 'FeatureCollection',
+    features: [],
+  });
 
   //Effects
-
   useEffect(() => {
     if (!!filterStore.apartments.length) {
-      let tempFeatures: any = []
-      console.log('HA: ', filterStore.apartments)
+      let tempFeatures: any = [];
+      console.log('HA: ', filterStore.apartments);
 
       filterStore.apartments.forEach((item, index) => {
         if (item !== null) {
           let tempElement = {
-            "type": "Feature",
-            "id": index,
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                item.latitude,
-                item.longitude
-              ]
+            type: 'Feature',
+            id: index,
+            geometry: {
+              type: 'Point',
+              coordinates: [item.latitude, item.longitude],
             },
-            "properties": {
+            properties: {
               hintContent: item.name,
             },
-            "options": {
-              iconLayout: "default#image",
+            options: {
+              iconLayout: 'default#image',
               iconImageHref: marker,
               iconImageSize: [40, 60],
             },
-            "modules": [
-              'geoObject.addon.balloon',
-              'geoObject.addon.hint'
-            ]
-
-          }
+            modules: ['geoObject.addon.balloon', 'geoObject.addon.hint'],
+          };
           tempFeatures.push(tempElement);
         }
-      })
+      });
 
       setFeatures({
-        type: "FeatureCollection",
-        features: [...tempFeatures]
-      })
+        type: 'FeatureCollection',
+        features: [...tempFeatures],
+      });
     }
-
-  }, [filterStore.apartments])
+  }, [filterStore.apartments]);
 
   useEffect(() => {
-    filterStore.resetStore();
     filterStore.getAparts();
-
-    return () => {
-      filterStore.resetStore();
-    };
   }, []);
 
-
   return (
-    <div style={{position: 'relative', height: "95%"}}>
+    <div style={{ position: 'relative', height: '95%' }}>
       <MapContainer
         mapPolygonColors={props.mapPolygonColors}
-        state={{center: [45.035470, 38.975313], zoom: 12}}
+        state={{ center: [45.03547, 38.975313], zoom: 12 }}
         features={features}
         prices={props.prices}
       />
     </div>
   );
-};
+});
 
 export default EstateMap;

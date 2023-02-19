@@ -74,7 +74,7 @@ export class FilterStore {
     this.setLoading(true);
 
     this.filterService
-      .getAllFlats(500)
+      .getAllFlats(410)
       .then(item => {
         this.setPopularItems(item);
       })
@@ -87,7 +87,7 @@ export class FilterStore {
     this.setLoading(true);
 
     this.filterService
-      .getAllFlats(238)
+      .getAllFlats(1500)
       .then(item => {
         this.setAnalyticItems(item);
       })

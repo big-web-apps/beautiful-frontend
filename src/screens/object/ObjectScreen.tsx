@@ -19,9 +19,19 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useParams } from 'react-router-dom';
-import { Check, ExclamationMark, Heart, PlayerRecord, Report, Send } from 'tabler-icons-react';
+import {
+  ArrowDownRight,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  ExclamationMark,
+  Heart,
+  PlayerRecord,
+  Report,
+  Send,
+} from 'tabler-icons-react';
 import { TextHelper } from '../../helpers/TextHelper';
-import { comments, data } from './ObjectData';
+import { comments } from './ObjectData';
 import { CommentHtml } from './components/Comment';
 import { useRootStore } from '../../base/RootStore';
 import { observer } from 'mobx-react-lite';
@@ -49,7 +59,7 @@ export const ObjectScreen: React.FC = observer(() => {
       let price = currentItem?.price;
 
       for (let i = 1; i <= years; i++) {
-        price = price * currentItem?.coefficient;
+        price *= currentItem?.coefficient;
       }
 
       setMoney(price);
@@ -88,10 +98,60 @@ export const ObjectScreen: React.FC = observer(() => {
                   {currentItem?.square} м² ({currentItem?.living_square} м²),
                 </Text>
                 <Text fz={24}>{currentItem?.floor} этаж</Text>
-
-                <Text pt={16} fz={28}>
-                  {TextHelper.getPriceString(currentItem?.price)}
-                </Text>
+                <Group pt={16} align={'center'}>
+                  {/* {currentItem?.p ? (
+                    <>
+                      <Box mr={props.marginBetween || 0.5}>
+                        <Typography variant={props.mainTextVariant} color="primary">
+                          {TextHelper.getPriceString(props.discountPrice)}
+                        </Typography>
+                      </Box>
+                      {props.price || props.price === 0 ? (
+                        <Typography className={clsx(typography.caption2, classes.oldPriceText)}>
+                          {TextHelper.getPriceString(props.price)}
+                        </Typography>
+                      ) : null}
+                    </>
+                  ) : (
+                    <>
+                      {props.price || props.price === 0 ? (
+                        <Box mr={0.5}>
+                          <Typography variant={props.mainTextVariant} color="primary">
+                            {TextHelper.getPriceString(props.price)}
+                          </Typography>
+                        </Box>
+                      ) : null}
+                    </>
+                  )}*/}
+                  <Text pb={16} fz={28}>
+                    {TextHelper.getPriceString(currentItem?.price)}
+                  </Text>
+                  <Group mb={20} align={'center'}>
+                    <Text
+                      pt={2}
+                      size={24}
+                      fw={600}
+                      c={
+                        currentItem?.coefficient && currentItem.coefficient > 1
+                          ? currentItem.coefficient > 1.09
+                            ? 'green'
+                            : 'yellow'
+                          : 'red'
+                      }
+                    >
+                      {currentItem?.coefficient && currentItem.coefficient.toFixed(2)}
+                    </Text>
+                    {currentItem?.coefficient && currentItem.coefficient > 1 ? (
+                      currentItem.coefficient > 1.09 ? (
+                        <ArrowUpRight size={24} />
+                      ) : (
+                        <ArrowRight size={24} />
+                      )
+                    ) : (
+                      <ArrowDownRight size={24} />
+                    )}
+                  </Group>
+                </Group>
                 <Text fz={20}>({TextHelper.getPriceString(currentItem?.meter_price)} /м²)</Text>
               </Grid.Col>
               <Grid.Col span={6}>
