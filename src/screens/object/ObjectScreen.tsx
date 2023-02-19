@@ -36,6 +36,7 @@ import { CommentHtml } from './components/Comment';
 import { useRootStore } from '../../base/RootStore';
 import { observer } from 'mobx-react-lite';
 import { rent } from '../stat/components/data';
+import pig from '../../assets/images/o.png';
 
 export const ObjectScreen: React.FC = observer(() => {
   const { filterStore } = useRootStore();
@@ -72,7 +73,15 @@ export const ObjectScreen: React.FC = observer(() => {
       <Container pt={40} size={'xl'}>
         <Grid gutter={40}>
           <Grid.Col span={3}>
-            <Image src={currentItem?.image} width={'100%'} />
+            <img
+              src={currentItem?.image || pig}
+              width={'100%'}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null;
+                //@ts-ignore
+                currentTarget.src = pig;
+              }}
+            />
           </Grid.Col>
           <Grid.Col span={9}>
             <Group position={'apart'}>

@@ -1,16 +1,13 @@
 import React from 'react';
 import {
   Accordion,
-  Box,
   Button,
   Card,
-  Container,
   Flex,
   Grid,
   Group,
   MultiSelect,
   RangeSlider,
-  Stack,
   Text,
   useMantineTheme,
 } from '@mantine/core';
@@ -108,12 +105,12 @@ export const Filters: React.FC<IFiltersProps> = props => {
                   px={16}
                   value={props.roomsValue}
                   onChange={props.setRoomsValue}
-                  min={1}
+                  min={0}
                   max={3}
                   step={1}
                   minRange={0}
                   marks={[
-                    { value: 1, label: '1' },
+                    { value: 0, label: '0' },
                     { value: 3, label: '3' },
                   ]}
                   size={'lg'}
@@ -191,14 +188,16 @@ export const Filters: React.FC<IFiltersProps> = props => {
           <Button
             disabled
             radius={'md'}
-            leftIcon={<LockOpen style={{color: 'gray'}} />}
+            leftIcon={<LockOpen style={{ color: 'gray' }} />}
             color={'yellow'}
             fullWidth
             p={8}
             style={{ height: '100%', width: '100%' }}
           >
             <Flex align={'flex-start'} direction={'column'} style={{ width: '100%' }}>
-              <Text size={'lg'} sx={{color: theme.colors.gray[5]}}>Средний риск</Text>
+              <Text size={'lg'} sx={{ color: theme.colors.gray[5] }}>
+                Средний риск
+              </Text>
               <Text size={'sm'} sx={{ lineHeight: 1.3, color: theme.colors.gray[5] }}>
                 Надежные застройщики <br />
                 на этапе строительства
@@ -210,14 +209,16 @@ export const Filters: React.FC<IFiltersProps> = props => {
           <Button
             disabled
             radius={'md'}
-            leftIcon={<LockOff style={{color: 'gray'}} />}
+            leftIcon={<LockOff style={{ color: 'gray' }} />}
             color={'red'}
             fullWidth
             p={8}
             style={{ height: '100%' }}
           >
             <Flex align={'flex-start'} direction={'column'} style={{ width: '100%' }}>
-              <Text size={'lg'}  sx={{color: theme.colors.gray[5]}}>Максимальный риск</Text>
+              <Text size={'lg'} sx={{ color: theme.colors.gray[5] }}>
+                Максимальный риск
+              </Text>
               <Text size={'sm'} sx={{ lineHeight: 1.3, color: theme.colors.gray[5] }}>
                 Покупка на котловане от застройщика,
                 <br /> рекомендуем быть внимательными

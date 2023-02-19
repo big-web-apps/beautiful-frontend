@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { ActionIcon, Badge, Button, Card, Group, Image, Text } from '@mantine/core';
+import { ActionIcon, Badge, Button, Card, Group, Text } from '@mantine/core';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, Heart } from 'tabler-icons-react';
 
 import img from './../../assets/images/image.png';
 import { Link } from 'react-router-dom';
 import { ObjectModel } from '../../screens/object/ObjectData';
 import { TextHelper } from '../../helpers/TextHelper';
+import pig from '../../assets/images/o.png';
 
 interface IEstateCard {
   data: ObjectModel;
@@ -54,7 +55,7 @@ const EstateCard: FC<IEstateCard> = props => {
         </Group>
         <img
           src={data.image || ''}
-          width={120}
+          width={130}
           style={{
             position: 'absolute',
             bottom: 8,
@@ -66,8 +67,7 @@ const EstateCard: FC<IEstateCard> = props => {
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             //@ts-ignore
-            currentTarget.src =
-              'https://avatars.mds.yandex.net/i?id=53fda90c878108f8d13a0315f5e22214-5459035-images-thumbs&n=13&exp=1';
+            currentTarget.src = pig;
           }}
         />
       </Card>

@@ -12,7 +12,7 @@ export class FilterStore {
   priceRange: [number, number] = [500000, 30000000];
   squareRange: [number, number] = [10, 150];
   floorsRange: [number, number] = [0, 25];
-  roomsRange: [number, number] = [1, 5];
+  roomsRange: [number, number] = [0, 3];
 
   districts: string[] = [];
   classes: string[] = ['Комфорт', 'Элит', 'Стандарт', 'Бизнес'];

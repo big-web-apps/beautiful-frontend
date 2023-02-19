@@ -1,20 +1,21 @@
 {
   "files": {
     "main.css": "./static/css/main.2efa84eb.css",
-    "main.js": "./static/js/main.cc29d0f7.js",
+    "main.js": "./static/js/main.70324117.js",
     "static/media/title.png": "./static/media/title.8da4c705c5a77dcaab3e.png",
     "static/media/GreycliffCF-Heavy.woff2": "./static/media/GreycliffCF-Heavy.9b33c66a967e2d89746d.woff2",
     "static/media/GreycliffCF-Bold.woff2": "./static/media/GreycliffCF-Bold.bf92e749965788179fa7.woff2",
     "static/media/GreycliffCF-DemiBold.woff2": "./static/media/GreycliffCF-DemiBold.e4bb2689fd9599c1a115.woff2",
     "static/media/GreycliffCF-Medium.woff2": "./static/media/GreycliffCF-Medium.e1ca957f3c08af6487b9.woff2",
     "static/media/GreycliffCF-Regular.woff2": "./static/media/GreycliffCF-Regular.a2bc50fe7bc24120ceaa.woff2",
+    "static/media/o.png": "./static/media/o.69c767dc8bf31cb9c554.png",
     "static/media/Marker.svg": "./static/media/Marker.db5722fdb56dc392599b2333eee2835a.svg",
     "index.html": "./index.html",
     "main.2efa84eb.css.map": "./static/css/main.2efa84eb.css.map",
-    "main.cc29d0f7.js.map": "./static/js/main.cc29d0f7.js.map"
+    "main.70324117.js.map": "./static/js/main.70324117.js.map"
   },
   "entrypoints": [
     "static/css/main.2efa84eb.css",
-    "static/js/main.cc29d0f7.js"
+    "static/js/main.70324117.js"
   ]
 }

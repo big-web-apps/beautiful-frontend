@@ -1,5 +1,5 @@
 import { ActionIcon, Button, Container, createStyles, Group, Header as MantineHeader } from '@mantine/core';
-import { BrandReact, PigMoney, Plus, TextWrapDisabled } from 'tabler-icons-react';
+import { PigMoney, Plus, TextWrapDisabled } from 'tabler-icons-react';
 import { ColorSchemeButton } from '../../ColorSchemeButton';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { NavLinks, Routes } from '../../../routes/routes';
@@ -87,7 +87,7 @@ const DefaultLayout = (props: { children: JSX.Element }) => {
 
   return (
     <>
-      {isMD ? renderDesktopMenu() : renderMobileMenu()}
+      {renderDesktopMenu()}
       <Container size={'xl'} py={70}>
         {props.children}
       </Container>
